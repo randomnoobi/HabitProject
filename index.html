@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Desk Talk</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Inter:wght@400;500;600;700&family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Source+Serif+4:ital,wght@0,400;1,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Notification Toast -->
+  <div id="notification-toast" class="toast hidden">
+    <div class="toast-icon"></div>
+    <div class="toast-body">
+      <div class="toast-title">Desk Talk</div>
+      <div class="toast-text"></div>
+    </div>
+  </div>
+
+  <div class="phone-frame">
+    <div class="phone-notch">
+      <div class="notch-camera"></div>
+    </div>
+
+    <div class="phone-screen">
+
+      <!-- Status Bar -->
+      <div class="status-bar">
+        <span class="status-time" id="status-time">9:41</span>
+        <div class="status-icons">
+          <svg class="status-icon" viewBox="0 0 16 16" width="14" height="14"><path fill="currentColor" d="M1 10l2-2c2.5-2.5 6.5-2.5 9 0l2 2-1.5 1.5L11 10c-1.7-1.7-4.3-1.7-6 0L3.5 11.5 1 10zm4 4l2-2c.6-.6 1.4-.6 2 0l2 2-1.5 1.5L8 14l-1.5 1.5L5 14zm-3-6l2-2c3.5-3.5 9.5-3.5 13 0l2 2-1.5 1.5-2-2c-2.8-2.8-7.2-2.8-10 0l-2 2L2 8z"/></svg>
+          <svg class="status-icon" viewBox="0 0 24 24" width="16" height="16"><rect x="1" y="6" width="4" height="12" rx="1" fill="currentColor" opacity="0.3"/><rect x="7" y="4" width="4" height="14" rx="1" fill="currentColor" opacity="0.5"/><rect x="13" y="2" width="4" height="16" rx="1" fill="currentColor" opacity="0.8"/><rect x="19" y="0" width="4" height="18" rx="1" fill="currentColor"/></svg>
+          <div class="battery-icon">
+            <div class="battery-body"><div class="battery-fill"></div></div>
+            <div class="battery-tip"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ========== SPLASH SCREEN ========== -->
+      <div id="screen-splash" class="screen active">
+        <div class="splash-bg-wave"></div>
+        <div class="splash-content">
+          <div class="splash-pills">
+            <span class="splash-pill" data-chat="monty" style="--delay:0">💻 Monty</span>
+            <span class="splash-pill" data-chat="glug" style="--delay:1">☕ Glug</span>
+            <span class="splash-pill" data-chat="munch" style="--delay:3">🍕 Munch</span>
+            <span class="splash-pill" data-chat="sheets" style="--delay:4">📄 Sheets</span>
+            <span class="splash-pill" data-chat="zip" style="--delay:5">🔌 Zip</span>
+            <span class="splash-pill" data-chat="surge" style="--delay:6">🔋 Surge</span>
+            <span class="splash-pill" data-chat="buzz" style="--delay:7">📱 Buzz</span>
+          </div>
+          <h1 class="splash-title">What's your desk <em>really</em> thinking?</h1>
+          <p class="splash-subtitle">swipe to find out</p>
+          <div class="splash-face-wrap">
+            <div class="splash-face">
+              <div class="splash-eye-l"></div>
+              <div class="splash-eye-r"></div>
+              <div class="splash-mouth"></div>
+            </div>
+          </div>
+          <button class="splash-cta" id="splash-start">Get Started</button>
+          <p class="splash-login">your objects are waiting</p>
+        </div>
+      </div>
+
+      <!-- ========== CHAT LIST SCREEN ========== -->
+      <div id="screen-chatlist" class="screen">
+        <div class="screen-header chatlist-header">
+          <div class="header-title-group">
+            <span class="header-greeting" id="header-greeting">Good Morning!</span>
+            <h1 class="header-title">Your desk is talking.</h1>
+            <span class="connection-badge" id="connection-badge">Demo</span>
+          </div>
+          <div class="header-btns-group">
+            <button class="header-btn settings-btn" id="btn-settings" aria-label="Safety rules settings">
+              <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/>
+              </svg>
+            </button>
+            <button type="button" class="header-btn camera-btn icon-detailed-camera" id="btn-camera" aria-label="Open live desk view">
+              <!-- Filled by app.js: single detailed desk webcam icon -->
+            </button>
+          </div>
+        </div>
+        <div class="screen-content" id="chatlist-content">
+          <!-- Rendered by JS -->
+        </div>
+      </div>
+
+      <!-- ========== CHAT SCREEN ========== -->
+      <div id="screen-chat" class="screen">
+        <div class="screen-header chat-header">
+          <button class="header-btn back-btn" id="btn-back" aria-label="Back to chats">
+            <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="15 18 9 12 15 6"/>
+            </svg>
+            <span class="back-label">Chats</span>
+          </button>
+          <div class="chat-header-info">
+            <span class="chat-header-icon" id="chat-header-icon"></span>
+            <span class="chat-header-name" id="chat-header-name"></span>
+          </div>
+          <button type="button" class="header-btn live-swipe-hint" id="btn-go-live" aria-label="Open live desk">Live</button>
+        </div>
+        <div class="screen-content chat-messages" id="chat-messages">
+          <!-- Rendered by JS -->
+        </div>
+        <!-- Camera Drawer (slides up from bottom) -->
+        <div class="camera-drawer" id="camera-drawer">
+          <div class="camera-drawer-handle" id="camera-drawer-handle">
+            <span class="drawer-grip" aria-hidden="true"></span>
+            <span class="drawer-handle-status" id="drawer-status"></span>
+            <svg class="drawer-arrow" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="18 15 12 9 6 15"/>
+            </svg>
+          </div>
+          <div class="drawer-tab-body" id="drawer-tab-camera">
+            <div id="drawer-camera-feeds"></div>
+            <div class="drawer-detection-summary" id="drawer-detection-strip"></div>
+          </div>
+        </div>
+
+        <div class="chat-input-area">
+          <div class="mention-dropdown hidden" id="mention-dropdown">
+            <!-- Populated by JS -->
+          </div>
+          <div class="chat-input-bar">
+            <button class="mention-trigger-btn" id="btn-mention" aria-label="Mention an object">@</button>
+            <input type="text" id="chat-input" placeholder="Type a message... use @ to mention objects" autocomplete="off">
+            <button class="send-btn" id="btn-send" aria-label="Send">
+              <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor">
+                <path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/>
+              </svg>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- ========== SETTINGS SCREEN (Safety Rules Editor) ========== -->
+      <div id="screen-settings" class="screen">
+        <div class="screen-header chat-header">
+          <button class="header-btn back-btn" id="btn-settings-back" aria-label="Back to chats">
+            <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="15 18 9 12 15 6"/>
+            </svg>
+            <span class="back-label">Chats</span>
+          </button>
+          <div class="chat-header-info">
+            <span class="chat-header-icon">⚙️</span>
+            <span class="chat-header-name">Safety Rules</span>
+          </div>
+          <div class="header-btn" style="width:22px"></div>
+        </div>
+        <div class="screen-content settings-content" id="settings-content">
+          <!-- Rendered by JS -->
+        </div>
+      </div>
+
+      <!-- ========== LIVE DESK (TikTok-style + 弹幕) ========== -->
+      <div id="screen-camera" class="screen">
+        <div class="live-stage">
+          <div id="live-video-primary" class="live-video-primary">
+            <!-- Primary full-bleed feed (live or demo) -->
+          </div>
+          <div id="danmu-layer" class="danmu-layer" aria-live="polite"></div>
+          <div class="live-chrome">
+            <button type="button" class="live-back-btn" id="btn-cam-back" aria-label="Back">
+              <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+              <span>Chat</span>
+            </button>
+            <div class="live-pill" id="live-detection-pill">Desk</div>
+          </div>
+          <!-- Demo-only: hidden full sim markup cloned if needed -->
+          <div id="sim-camera-feeds" class="live-sim-hidden" aria-hidden="true">
+            <div class="camera-view topdown" id="camera-topdown">
+              <div class="desk-surface">
+                <div class="detected-object obj-monty" data-name="Monty 🖥️"><div class="detect-box"></div></div>
+                <div class="detected-object obj-glug" data-name="Glug 🥤"><div class="detect-box"></div></div>
+                <div class="detected-object obj-sheets" data-name="Sheets 📄"><div class="detect-box"></div></div>
+                <div class="detected-object obj-zip" data-name="Zip 🔌"><div class="detect-box"></div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Home indicator -->
+      <div class="home-indicator"></div>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>

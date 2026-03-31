@@ -1,0 +1,490 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Desk Talk — Your Desk Has Something to Say</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,600;1,6..72,400&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Character icons — same hand-drawn SVGs as the Desk Talk app (app.js CHAR_SVGS) -->
+  <svg xmlns="http://www.w3.org/2000/svg" style="position:absolute;width:0;height:0;overflow:hidden" aria-hidden="true">
+    <symbol id="icon-monty" viewBox="0 0 40 36"><rect x="3" y="2" width="34" height="22" rx="4" fill="#B4D3D9" stroke="#7EADB6" stroke-width="2.5"/><rect x="11" y="26" width="18" height="6" rx="3" fill="#CADEDF" stroke="#7EADB6" stroke-width="1.5"/><circle cx="15" cy="12" r="2.5" fill="#3D3552"/><circle cx="25" cy="12" r="2.5" fill="#3D3552"/><path d="M16 18Q20 15 24 18" stroke="#3D3552" stroke-width="2" stroke-linecap="round" fill="none"/></symbol>
+    <symbol id="icon-glug" viewBox="0 0 40 40"><path d="M10 10L12 34Q12 37 15 37H25Q28 37 28 34L30 10Z" fill="#A0C4C4" stroke="#6B9494" stroke-width="2.5"/><path d="M30 16Q36 16 36 22Q36 28 30 28" stroke="#6B9494" stroke-width="2.5" fill="none"/><circle cx="17" cy="22" r="2" fill="#2A3D3D"/><circle cx="24" cy="22" r="2" fill="#2A3D3D"/><ellipse cx="20" cy="28" rx="3" ry="2" stroke="#2A3D3D" stroke-width="1.5" fill="none"/><path d="M15 6Q17 2 19 6" stroke="#6B9494" stroke-width="1.5" stroke-linecap="round" fill="none"/><path d="M22 4Q24 0 26 4" stroke="#6B9494" stroke-width="1.5" stroke-linecap="round" fill="none"/></symbol>
+    <symbol id="icon-munch" viewBox="0 0 40 40"><path d="M20 4L36 36H4Z" fill="#D4A0A0" stroke="#A06060" stroke-width="2.5" stroke-linejoin="round"/><path d="M4 36Q12 32 20 36Q28 32 36 36" fill="#D4C4A0" stroke="#9A8560" stroke-width="2"/><circle cx="16" cy="22" r="2" fill="#3D2020"/><circle cx="24" cy="22" r="2" fill="#3D2020"/><path d="M17 28Q20 31 23 28" stroke="#3D2020" stroke-width="2" stroke-linecap="round" fill="none"/></symbol>
+    <symbol id="icon-sheets" viewBox="0 0 34 42"><path d="M2 2H24L32 10V40H2Z" fill="#D4C4A0" stroke="#9A8560" stroke-width="2.5" stroke-linejoin="round"/><path d="M24 2V10H32" stroke="#9A8560" stroke-width="2" stroke-linejoin="round" fill="#C4B490"/><circle cx="12" cy="20" r="2" fill="#3D3520"/><circle cx="22" cy="20" r="2" fill="#3D3520"/><path d="M14 26Q17 23 20 26" stroke="#3D3520" stroke-width="2" stroke-linecap="round" fill="none"/><path d="M8 32H24" stroke="#9A856044" stroke-width="1.5"/><path d="M8 36H18" stroke="#9A856044" stroke-width="1.5"/></symbol>
+    <symbol id="icon-zip" viewBox="0 0 44 36"><path d="M6 28Q6 10 18 10Q30 10 30 28" stroke="#6B8F6B" stroke-width="5" stroke-linecap="round" fill="none"/><circle cx="30" cy="28" r="7" fill="#A8BFA8" stroke="#6B8F6B" stroke-width="2.5"/><circle cx="28" cy="26" r="1.5" fill="#1E2E1E"/><circle cx="33" cy="26" r="1.5" fill="#1E2E1E"/><path d="M28 31Q31 33 33 31" stroke="#1E2E1E" stroke-width="1.5" stroke-linecap="round" fill="none"/><circle cx="6" cy="28" r="3" fill="#A8BFA8" stroke="#6B8F6B" stroke-width="1.5"/></symbol>
+    <symbol id="icon-surge" viewBox="0 0 36 40"><rect x="3" y="2" width="30" height="36" rx="6" fill="#BDA6CE" stroke="#9B8EC7" stroke-width="2.5"/><path d="M20 10L14 22H22L16 34" stroke="#2D2040" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/><circle cx="11" cy="12" r="2" fill="#2D2040"/><circle cx="25" cy="12" r="2" fill="#2D2040"/></symbol>
+    <symbol id="icon-buzz" viewBox="0 0 30 42"><rect x="2" y="2" width="26" height="38" rx="6" fill="#D4A0B8" stroke="#A06080" stroke-width="2.5"/><rect x="5" y="7" width="20" height="22" rx="3" fill="#F2EAE0"/><circle cx="11" cy="16" r="2.5" fill="#3D2030"/><circle cx="19" cy="16" r="2.5" fill="#3D2030"/><path d="M12 22Q15 25 18 22" stroke="#3D2030" stroke-width="2" stroke-linecap="round" fill="none"/><circle cx="15" cy="36" r="2" fill="#F2EAE0"/></symbol>
+  </svg>
+
+  <aside class="site-contents" aria-label="Contents">
+    <div class="site-contents-header">
+      <span class="site-contents-title">Contents</span>
+      <div class="site-contents-progress-wrap" aria-hidden="true">
+        <div class="site-contents-progress-bar"></div>
+      </div>
+    </div>
+    <ol class="site-contents-list">
+      <li><a href="#hero" data-contents>Intro</a></li>
+      <li><a href="#concept-video" data-contents>Video</a></li>
+      <li><a href="#problem" data-contents>Problem</a></li>
+      <li><a href="#concept" data-contents>Approach</a></li>
+      <li><a href="#hardware" data-contents>Hardware</a></li>
+      <li><a href="#pipeline" data-contents>System</a></li>
+      <li><a href="#characters" data-contents>Cast</a></li>
+      <li><a href="#relationships" data-contents>Relations</a></li>
+      <li><a href="#demo" data-contents>Gallery</a></li>
+      <li><a href="#contact" data-contents>Contact</a></li>
+    </ol>
+  </aside>
+
+  <div class="page-main">
+  <nav class="nav">
+    <a href="#hero" class="nav-logo">Desk Talk</a>
+    <div class="nav-links">
+      <a href="#problem">Problem</a>
+      <a href="#concept">Approach</a>
+      <a href="#hardware">Hardware</a>
+      <a href="#pipeline">System</a>
+      <a href="#characters">Cast</a>
+      <a href="#concept-video">Video</a>
+      <a href="#demo">Gallery</a>
+      <a href="#contact" class="nav-contact">Contact</a>
+    </div>
+    <button type="button" class="nav-toggle" aria-label="Menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+
+  <!-- ═══════════ HERO ═══════════ -->
+  <section id="hero" class="hero">
+    <div class="ref-measure ref-measure--wide hero-inner reveal">
+      <h1 class="hero-title">Desk Talk</h1>
+      <p class="ref-lede">Work in progress — vision and a local LLM so risky desk layouts show up as group-chat banter, not alarms.</p>
+      <p class="ref-prose">YOLOv8 tracks objects; relationship passes (zones, edges, chains, time) flag tension; Ollama writes in-character lines for Monty, Glug, and the rest. Flask serves the camera and the chat.</p>
+    </div>
+    <div class="media-strip">
+      <figure class="ref-placeholder reveal">
+        <div class="ref-placeholder-surface ref-placeholder-surface--d" role="presentation"></div>
+        <figcaption class="ref-placeholder-cap">Image placeholder — desk / product overview</figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <!-- ═══════════ VIDEO SHOWCASE — Full bleed ═══════════ -->
+  <section id="concept-video" class="showcase showcase-video" data-speed="0.2">
+    <div class="showcase-bg">
+      <video class="showcase-vid" autoplay muted loop playsinline>
+        <source src="demo.mp4" type="video/mp4">
+      </video>
+    </div>
+    <div class="showcase-overlay"></div>
+    <div class="showcase-caption reveal">
+      <span class="showcase-tag">The Setup</span>
+      <h2>Two cameras. One desk.<br>A living conversation.</h2>
+    </div>
+    <button class="showcase-sound-toggle" aria-label="Toggle sound">
+      <svg class="icon-muted" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><line x1="23" y1="9" x2="17" y2="15"/><line x1="17" y1="9" x2="23" y2="15"/></svg>
+      <svg class="icon-unmuted" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M19.07 4.93a10 10 0 010 14.14"/><path d="M15.54 8.46a5 5 0 010 7.07"/></svg>
+    </button>
+  </section>
+
+  <!-- ═══════════ PROBLEM ═══════════ -->
+  <section id="problem" class="ref-section">
+    <div class="ref-measure ref-measure--wide reveal">
+      <h2 class="ref-h2">The problem</h2>
+      <p class="ref-prose">After school or away from home, many people hit a stretch where no one is checking in. Habits slip less from not knowing better than from missing immediate feedback — the cup near the laptop, cables in the way, eating at the desk.</p>
+      <p class="ref-prose">Reminder apps get disabled; ambient cues often land better than another ping. This project treats the desk as a small ecosystem: vision notices how objects relate to each other, and a group chat turns that into dialogue so the scene registers without feeling like surveillance.</p>
+    </div>
+    <div class="media-strip">
+      <figure class="ref-placeholder reveal">
+        <div class="ref-placeholder-surface ref-placeholder-surface--b" role="presentation"></div>
+        <figcaption class="ref-placeholder-cap">Image placeholder — desk context / habits</figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <!-- ═══════════ CONCEPT ═══════════ -->
+  <section id="concept" class="ref-section">
+    <div class="ref-measure ref-measure--wide reveal">
+      <h2 class="ref-h2">Approach</h2>
+      <p class="ref-prose"><strong>Observe.</strong> One or two webcams; YOLOv8 keeps boxes and classes on the things that matter.</p>
+      <p class="ref-prose"><strong>Relate.</strong> Edge proximity, danger zones around laptops and keyboards, chain-style “something between A and B,” and light temporal tracking — not a single distance threshold.</p>
+      <p class="ref-prose"><strong>Converse.</strong> When something’s wrong, a local LLM (Ollama) writes the line; objects stay in voice.</p>
+      <p class="ref-prose"><strong>Nudge.</strong> The tone is unease and humor, not orders — enough to look down and fix the layout.</p>
+      <p class="ref-pull">“I feel a little tense… that cup is getting closer.” <span class="ref-pull-cite">— Monty</span></p>
+    </div>
+    <div class="media-strip">
+      <figure class="ref-placeholder reveal">
+        <div class="ref-placeholder-surface ref-placeholder-surface--c" role="presentation"></div>
+        <figcaption class="ref-placeholder-cap">Image placeholder — observe / relate / converse diagram</figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <!-- ═══════════ HARDWARE ═══════════ -->
+  <section id="hardware" class="ref-section">
+    <div class="ref-measure ref-measure--wide reveal">
+      <h2 class="ref-h2">Hardware</h2>
+      <p class="ref-prose">eMeet C960 on a tripod in front of the desk, angled down. 1080p, ~90° field of view, USB into OpenCV. The diagram below is the intended layout — lens covering the whole surface.</p>
+    </div>
+
+    <div class="media-strip">
+      <figure class="ref-placeholder reveal">
+        <div class="ref-placeholder-surface" role="presentation"></div>
+        <figcaption class="ref-placeholder-cap">Image placeholder — camera rig / physical setup</figcaption>
+      </figure>
+    </div>
+
+    <div class="media-strip">
+      <div class="hw-diagram-wrap reveal">
+        <svg class="hw-svg" viewBox="0 0 800 500" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <!-- Desk surface (3D perspective) -->
+          <polygon points="120,200 680,200 740,420 60,420" fill="#E8DFD4" stroke="#C4B8A8" stroke-width="2"/>
+          <polygon points="60,420 740,420 740,440 60,440" fill="#D4C8B8" stroke="#C4B8A8" stroke-width="1.5"/>
+          <text x="400" y="340" text-anchor="middle" font-family="Inter, sans-serif" font-size="13" font-weight="700" letter-spacing="0.12em" fill="rgba(0,0,0,0.12)">DESK SURFACE</text>
+
+          <!-- Objects on desk — app hand-drawn icons (CHAR_SVGS) -->
+          <g transform="translate(228,228)">
+            <svg width="64" height="58" viewBox="0 0 40 36" xmlns="http://www.w3.org/2000/svg"><use href="#icon-monty"/></svg>
+            <text x="32" y="62" text-anchor="middle" font-family="Inter, sans-serif" font-size="10" font-weight="600" fill="#6A8A94">Monty</text>
+          </g>
+          <g transform="translate(408,258)">
+            <svg width="56" height="56" viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg"><use href="#icon-glug"/></svg>
+            <text x="28" y="64" text-anchor="middle" font-family="Inter, sans-serif" font-size="10" font-weight="600" fill="#6B9494">Glug</text>
+          </g>
+          <g transform="translate(508,238)">
+            <svg width="48" height="68" viewBox="0 0 30 42" xmlns="http://www.w3.org/2000/svg"><use href="#icon-buzz"/></svg>
+            <text x="24" y="76" text-anchor="middle" font-family="Inter, sans-serif" font-size="10" font-weight="600" fill="#A06080">Buzz</text>
+          </g>
+          <g transform="translate(318,338)">
+            <svg width="56" height="56" viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg"><use href="#icon-munch"/></svg>
+            <text x="28" y="64" text-anchor="middle" font-family="Inter, sans-serif" font-size="10" font-weight="600" fill="#A06060">Munch</text>
+          </g>
+
+          <!-- Field-of-view cone -->
+          <polygon points="400,105 100,420 700,420" fill="url(#fovGrad)" opacity="0.18"/>
+          <line x1="400" y1="105" x2="100" y2="420" stroke="#888" stroke-width="1" stroke-dasharray="6,4" opacity="0.5"/>
+          <line x1="400" y1="105" x2="700" y2="420" stroke="#888" stroke-width="1" stroke-dasharray="6,4" opacity="0.5"/>
+          <text x="400" y="400" text-anchor="middle" font-family="Inter, sans-serif" font-size="11" font-weight="600" fill="#666" opacity="0.85">90° Field of View</text>
+
+          <!-- Camera on stand -->
+          <g transform="translate(400,50)">
+            <!-- Stand pole -->
+            <rect x="-3" y="30" width="6" height="50" rx="3" fill="#555" stroke="#444" stroke-width="1"/>
+            <!-- Stand base -->
+            <ellipse cx="0" cy="82" rx="22" ry="6" fill="#444" stroke="#333" stroke-width="1"/>
+            <!-- Camera body -->
+            <rect x="-28" y="-8" width="56" height="36" rx="8" fill="#333" stroke="#222" stroke-width="1.5"/>
+            <!-- Lens ring -->
+            <circle cx="0" cy="10" r="12" fill="#222" stroke="#444" stroke-width="1"/>
+            <circle cx="0" cy="10" r="8" fill="#1a1430" stroke="#555" stroke-width="0.5"/>
+            <circle cx="0" cy="10" r="4" fill="#666" opacity="0.7"/>
+            <!-- LED indicator -->
+            <circle cx="-18" cy="4" r="2.5" fill="#A8BFA8"/>
+            <!-- Label -->
+            <text x="0" y="-16" text-anchor="middle" font-family="Newsreader, Georgia, serif" font-size="14" fill="#3D3552">eMeet C960</text>
+            <text x="0" y="100" text-anchor="middle" font-family="Inter, sans-serif" font-size="10" font-weight="600" fill="#666">on tripod stand</text>
+          </g>
+
+          <!-- Annotation arrows -->
+          <line x1="160" y1="160" x2="370" y2="80" stroke="#888" stroke-width="1" stroke-dasharray="4,3" opacity="0.6"/>
+          <text x="145" y="155" text-anchor="end" font-family="Inter, sans-serif" font-size="11" font-weight="600" fill="#555">Camera faces desk</text>
+
+          <!-- Gradient definition -->
+          <defs>
+            <linearGradient id="fovGrad" x1="400" y1="105" x2="400" y2="420" gradientUnits="userSpaceOnUse">
+              <stop offset="0%" stop-color="#000" stop-opacity="0.18"/>
+              <stop offset="100%" stop-color="#000" stop-opacity="0.02"/>
+            </linearGradient>
+          </defs>
+        </svg>
+      </div>
+    </div>
+
+    <div class="ref-measure ref-measure--wide">
+      <!-- ── Specs ── -->
+      <div class="hw-specs-grid">
+        <div class="hw-spec-card reveal">
+          <h3>Camera Model</h3>
+          <div class="hw-spec-detail">
+            <span class="hw-spec-value">eMeet C960</span>
+            <p>1080p Full HD webcam with built-in dual microphones, wide-angle glass lens, and automatic low-light correction. Plug-and-play USB — no drivers needed. Compatible with OpenCV's VideoCapture interface out of the box.</p>
+          </div>
+          <div class="hw-spec-row">
+            <div class="hw-spec-item">
+              <span class="hw-spec-label">Resolution</span>
+              <span class="hw-spec-val">1920 × 1080</span>
+            </div>
+            <div class="hw-spec-item">
+              <span class="hw-spec-label">Frame Rate</span>
+              <span class="hw-spec-val">30 FPS</span>
+            </div>
+            <div class="hw-spec-item">
+              <span class="hw-spec-label">Field of View</span>
+              <span class="hw-spec-val">90°</span>
+            </div>
+            <div class="hw-spec-item">
+              <span class="hw-spec-label">Interface</span>
+              <span class="hw-spec-val">USB 2.0</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="hw-spec-card reveal">
+          <h3>Placement</h3>
+          <div class="hw-spec-detail">
+            <span class="hw-spec-value">Front-facing on Stand</span>
+            <p>Mounted on a tripod stand directly in front of the desk, angled slightly downward. The 90° wide-angle lens covers the full desk surface from edge to edge — a single camera captures all objects and their spatial relationships.</p>
+          </div>
+          <div class="hw-spec-row">
+            <div class="hw-spec-item">
+              <span class="hw-spec-label">Position</span>
+              <span class="hw-spec-val">Front of desk</span>
+            </div>
+            <div class="hw-spec-item">
+              <span class="hw-spec-label">Angle</span>
+              <span class="hw-spec-val">~30° downward</span>
+            </div>
+            <div class="hw-spec-item">
+              <span class="hw-spec-label">Streaming</span>
+              <span class="hw-spec-val">MJPEG via Flask</span>
+            </div>
+            <div class="hw-spec-item">
+              <span class="hw-spec-label">Detection</span>
+              <span class="hw-spec-val">YOLOv8n (CPU)</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="media-strip">
+      <figure class="ref-placeholder reveal">
+        <div class="ref-placeholder-surface ref-placeholder-surface--e" role="presentation"></div>
+        <figcaption class="ref-placeholder-cap">Image placeholder — live feed with detection overlays</figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <!-- ═══════════ PIPELINE ═══════════ -->
+  <section id="pipeline" class="ref-section">
+    <div class="ref-measure ref-measure--wide reveal">
+      <h2 class="ref-h2">System</h2>
+      <p class="ref-prose">Frames go through YOLOv8, then relationship passes — centroid distance, chain paths, temporal drift. When everything’s fine, the server updates quietly. When it isn’t, Ollama drafts the line and the chat moves.</p>
+    </div>
+    <div class="media-strip">
+      <figure class="arch-figure reveal">
+        <img class="arch-figure-img" src="whiteboard_exported_image.png"
+          alt="System diagram: webcam, YOLOv8, relationship passes, Ollama, and chat server."
+          loading="lazy" decoding="async">
+      </figure>
+    </div>
+    <div class="ref-measure ref-measure--wide reveal">
+      <h2 class="ref-h2 ref-h2--sub">How danger is detected</h2>
+      <p class="ref-prose">After YOLOv8 labels each object, the backend combines several relationship passes. Any one of them can flag a situation before the chat sees it — the UI above configures only the first kind; the rest are computed from geometry and history.</p>
+      <ul class="danger-detect-list">
+        <li><strong>Danger zones</strong> — Each class (laptop, cup, phone, …) can carry an expanded margin in pixels. If another object’s box enters that padded region, it counts as a spatial conflict — what you tune in Safety Rules.</li>
+        <li><strong>Centroid distance</strong> — Pairs of objects are compared by center-to-center distance against safe thresholds so “too close” doesn’t depend only on overlapping boxes.</li>
+        <li><strong>Chain / sandwich</strong> — The pipeline checks whether a third object sits between two others (for example, something lined up between a drink and the keyboard), which often predicts knock-over or spill paths.</li>
+        <li><strong>Temporal drift</strong> — Short-term history catches risks that build slowly: objects creeping closer frame after frame, or unstable layouts that worsen over a few seconds.</li>
+      </ul>
+      <p class="ref-prose">When a pass says “safe,” the server updates state quietly. When any pass says “risky,” the same frame can be sent to Ollama for an in-character line in group chat.</p>
+    </div>
+    <div class="media-strip">
+      <figure class="ref-placeholder reveal">
+        <div class="ref-placeholder-surface ref-placeholder-surface--f" role="presentation"></div>
+        <figcaption class="ref-placeholder-cap">Image placeholder — Ollama + server / chat payload flow</figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <!-- ═══════════ CHARACTERS + RELATIONSHIPS ═══════════ -->
+  <section id="characters" class="ref-section">
+    <div class="ref-measure ref-measure--wide reveal">
+      <h2 class="ref-h2">Cast</h2>
+      <p class="ref-prose">Seven voices mapped to desk objects — each with a habit lane (hydration, posture, screen time, etc.) and a way of complaining.</p>
+      <p class="ref-prose"><strong>Monty</strong> — laptop / keyboard. Anxious center; spills and heat.</p>
+      <p class="ref-prose"><strong>Glug</strong> — cup. Oblivious; hydration coach.</p>
+      <p class="ref-prose"><strong>Munch</strong> — snack. Hedonist; crumbs vs keyboard.</p>
+      <p class="ref-prose"><strong>Sheets</strong> — paper. Fragile; deadlines and stains.</p>
+      <p class="ref-prose"><strong>Zip</strong> — cable. Chaos agent; organization nudges.</p>
+      <p class="ref-prose"><strong>Surge</strong> — power bank. Heavy and unaware.</p>
+      <p class="ref-prose"><strong>Buzz</strong> — phone. Attention hog; screen discipline.</p>
+
+    </div>
+    <div class="media-strip">
+      <div class="ref-placeholder-grid">
+        <figure class="ref-placeholder ref-placeholder--tile reveal">
+          <div class="ref-placeholder-surface ref-placeholder-surface--b" role="presentation"></div>
+          <figcaption class="ref-placeholder-cap">Cast avatars / lineup</figcaption>
+        </figure>
+        <figure class="ref-placeholder ref-placeholder--tile reveal">
+          <div class="ref-placeholder-surface ref-placeholder-surface--c" role="presentation"></div>
+          <figcaption class="ref-placeholder-cap">Private habit threads</figcaption>
+        </figure>
+      </div>
+    </div>
+    <div class="ref-measure ref-measure--wide reveal">
+      <h2 class="ref-h2 ref-h2--sub" id="relationships">How they relate</h2>
+      <p class="ref-prose">Sample pairs the stack cares about — risk is staged for dialogue, not a siren.</p>
+    </div>
+
+    <div class="media-strip media-strip--table">
+      <div class="rel-table-wrap rel-table-wrap--light reveal">
+        <table class="rel-table rel-table--light">
+          <thead>
+            <tr><th>Object A</th><th></th><th>Object B</th><th>Risk</th><th>Description</th></tr>
+          </thead>
+          <tbody>
+            <tr><td class="rel-td-icon"><span class="rel-pair"><svg class="rel-ico" width="22" height="22" viewBox="0 0 40 40" aria-hidden="true"><use href="#icon-glug"/></svg> Cup</span></td><td class="arrow">→</td><td class="rel-td-icon"><span class="rel-pair"><svg class="rel-ico" width="22" height="20" viewBox="0 0 40 36" aria-hidden="true"><use href="#icon-monty"/></svg> Laptop</span></td><td><span class="risk critical">Critical</span></td><td>Liquid spill — existential threat</td></tr>
+            <tr><td class="rel-td-icon"><span class="rel-pair"><svg class="rel-ico" width="22" height="22" viewBox="0 0 40 40" aria-hidden="true"><use href="#icon-munch"/></svg> Snack</span></td><td class="arrow">→</td><td class="rel-td-icon"><span class="rel-pair"><svg class="rel-ico" width="22" height="20" viewBox="0 0 40 36" aria-hidden="true"><use href="#icon-monty"/></svg> Laptop</span></td><td><span class="risk high">High</span></td><td>Crumb contamination on keyboard</td></tr>
+            <tr><td class="rel-td-icon"><span class="rel-pair"><svg class="rel-ico" width="24" height="20" viewBox="0 0 44 36" aria-hidden="true"><use href="#icon-zip"/></svg> Cable</span></td><td class="arrow">→</td><td class="rel-td-icon"><span class="rel-pair"><svg class="rel-ico" width="22" height="22" viewBox="0 0 40 40" aria-hidden="true"><use href="#icon-glug"/></svg> Cup</span></td><td><span class="risk critical">Critical</span></td><td>Knock-over trigger</td></tr>
+            <tr><td class="rel-td-icon"><span class="rel-pair"><svg class="rel-ico" width="20" height="22" viewBox="0 0 36 40" aria-hidden="true"><use href="#icon-surge"/></svg> Power Bank</span></td><td class="arrow">→</td><td class="rel-td-icon"><span class="rel-pair"><svg class="rel-ico" width="22" height="20" viewBox="0 0 40 36" aria-hidden="true"><use href="#icon-monty"/></svg> Laptop</span></td><td><span class="risk high">High</span></td><td>Pressure and heat damage</td></tr>
+            <tr><td class="rel-td-icon"><span class="rel-pair"><svg class="rel-ico" width="22" height="22" viewBox="0 0 40 40" aria-hidden="true"><use href="#icon-glug"/></svg> Cup</span></td><td class="arrow">→</td><td class="rel-td-icon"><span class="rel-pair"><svg class="rel-ico" width="20" height="24" viewBox="0 0 34 42" aria-hidden="true"><use href="#icon-sheets"/></svg> Paper</span></td><td><span class="risk high">High</span></td><td>Water damage to documents</td></tr>
+            <tr><td class="rel-td-icon"><span class="rel-pair"><svg class="rel-ico" width="24" height="20" viewBox="0 0 44 36" aria-hidden="true"><use href="#icon-zip"/></svg> Cable</span></td><td class="arrow">→</td><td class="rel-td-icon"><span class="rel-pair"><svg class="rel-ico" width="18" height="26" viewBox="0 0 30 42" aria-hidden="true"><use href="#icon-buzz"/></svg> Phone</span></td><td><span class="risk medium">Medium</span></td><td>Pull-off-desk risk</td></tr>
+            <tr><td class="rel-td-icon"><span class="rel-pair"><svg class="rel-ico" width="22" height="22" viewBox="0 0 40 40" aria-hidden="true"><use href="#icon-munch"/></svg> Snack</span></td><td class="arrow">→</td><td class="rel-td-icon"><span class="rel-pair"><svg class="rel-ico" width="20" height="24" viewBox="0 0 34 42" aria-hidden="true"><use href="#icon-sheets"/></svg> Paper</span></td><td><span class="risk medium">Medium</span></td><td>Oil and grease stains</td></tr>
+            <tr><td class="rel-td-icon"><span class="rel-pair"><svg class="rel-ico" width="18" height="26" viewBox="0 0 30 42" aria-hidden="true"><use href="#icon-buzz"/></svg> Phone</span></td><td class="arrow">→</td><td class="rel-td-icon"><span class="rel-pair"><svg class="rel-ico" width="22" height="20" viewBox="0 0 40 36" aria-hidden="true"><use href="#icon-monty"/></svg> Laptop</span></td><td><span class="risk low">Low</span></td><td>Competing for user attention</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════ DEMO CAROUSEL ═══════════ -->
+  <section id="demo" class="ref-section demo-section">
+    <div class="ref-measure ref-measure--wide reveal">
+      <h2 class="ref-h2">Gallery</h2>
+      <p class="ref-prose">Placeholder frames from development — arrows to step, or let it advance on its own.</p>
+    </div>
+
+    <div class="media-strip">
+      <figure class="ref-placeholder reveal">
+        <div class="ref-placeholder-surface ref-placeholder-surface--d" role="presentation"></div>
+        <figcaption class="ref-placeholder-cap">Image placeholder — build still / alternate angle</figcaption>
+      </figure>
+    </div>
+
+    <div class="media-strip media-strip--carousel">
+    <div class="carousel reveal">
+      <div class="carousel-track">
+        <div class="carousel-slide active">
+          <div class="slide-image">
+            <img class="slide-photo" src="groupchat-interface.png" alt="The Desk — group chat with Glug, Buzz, and live messages." loading="lazy" decoding="async">
+          </div>
+          <div class="slide-info">
+            <span class="slide-num">01 / 06</span>
+            <h3>Group Chat Interface</h3>
+            <p>The main group chat with all desk objects communicating about detected risks in real time. Each character has a unique bubble style and avatar.</p>
+          </div>
+        </div>
+        <div class="carousel-slide">
+          <div class="slide-image">
+            <div class="slide-placeholder" style="background: linear-gradient(135deg, #3d3d3d 0%, #6a6a6a 50%, #9a9a9a 100%);">
+              <span class="slide-placeholder-icon">🖥️</span>
+              <span class="slide-placeholder-label">Camera Feed with Detection Overlays</span>
+            </div>
+          </div>
+          <div class="slide-info">
+            <span class="slide-num">02 / 06</span>
+            <h3>Live Camera Feed</h3>
+            <p>Real-time detection with centroids and distance lines drawn between tracked objects. MJPEG streaming provides smooth video in the browser.</p>
+          </div>
+        </div>
+        <div class="carousel-slide">
+          <div class="slide-image">
+            <img class="slide-photo" src="safety-rules-configuration.png" alt="Safety Rules screen — per-class danger zones with named zones and radius sliders." loading="lazy" decoding="async">
+          </div>
+          <div class="slide-info">
+            <span class="slide-num">03 / 06</span>
+            <h3>Safety Rules</h3>
+            <p>Configure danger zones per object class: name each zone, set how many pixels to expand the bounding box, and add new classes from the app. When another detection enters that margin, it triggers the same pipeline as distance and chain checks.</p>
+          </div>
+        </div>
+        <div class="carousel-slide">
+          <div class="slide-image">
+            <div class="slide-placeholder" style="background: linear-gradient(135deg, #333 0%, #666 50%, #ccc 100%);">
+              <span class="slide-placeholder-icon">⚠️</span>
+              <span class="slide-placeholder-label">Danger Detection Alert</span>
+            </div>
+          </div>
+          <div class="slide-info">
+            <span class="slide-num">04 / 06</span>
+            <h3>Danger Detection</h3>
+            <p>When a cup gets too close to the laptop, objects react with genuine concern. The system captures a zoomed proof screenshot and shares it in chat.</p>
+          </div>
+        </div>
+        <div class="carousel-slide">
+          <div class="slide-image">
+            <div class="slide-placeholder" style="background: linear-gradient(135deg, #1a1a1a 0%, #555 50%, #888 100%);">
+              <span class="slide-placeholder-icon">🤖</span>
+              <span class="slide-placeholder-label">AI-Generated Dialogue</span>
+            </div>
+          </div>
+          <div class="slide-info">
+            <span class="slide-num">05 / 06</span>
+            <h3>LLM Conversations</h3>
+            <p>Every message is generated by a local LLM with full context of what's on the desk. No templates — each response is unique and in-character.</p>
+          </div>
+        </div>
+        <div class="carousel-slide">
+          <div class="slide-image">
+            <div class="slide-placeholder" style="background: linear-gradient(135deg, #2d2d2d 0%, #606060 50%, #b0b0b0 100%);">
+              <span class="slide-placeholder-icon">💧</span>
+              <span class="slide-placeholder-label">Habit Coaching Chats</span>
+            </div>
+          </div>
+          <div class="slide-info">
+            <span class="slide-num">06 / 06</span>
+            <h3>Habit Reminders</h3>
+            <p>Each character has a private chat focused on a habit area — hydration, posture, screen breaks, focus, energy, and screen time discipline.</p>
+          </div>
+        </div>
+      </div>
+
+      <button class="carousel-btn carousel-prev" aria-label="Previous slide">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+      </button>
+      <button class="carousel-btn carousel-next" aria-label="Next slide">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+      </button>
+
+      <div class="carousel-dots">
+        <button class="carousel-dot active" data-idx="0"></button>
+        <button class="carousel-dot" data-idx="1"></button>
+        <button class="carousel-dot" data-idx="2"></button>
+        <button class="carousel-dot" data-idx="3"></button>
+        <button class="carousel-dot" data-idx="4"></button>
+        <button class="carousel-dot" data-idx="5"></button>
+      </div>
+
+      <div class="carousel-progress"><div class="carousel-progress-bar"></div></div>
+    </div>
+    </div>
+  </section>
+
+  <footer class="footer ref-footer" id="contact">
+    <div class="ref-measure ref-measure--wide ref-footer-inner">
+      <h2 class="ref-h2">Stack</h2>
+      <p class="ref-pipes">Python · OpenCV · YOLOv8 · Flask · SSE · Ollama · HTML / JS</p>
+      <h2 class="ref-h2">Contact</h2>
+      <p class="ref-contact-links">
+        <a href="#" class="ref-arrow-link">GitHub</a>
+        <a href="#" class="ref-arrow-link">Documentation</a>
+      </p>
+      <p class="ref-bio">Student project — computer vision, local LLM, and object personas on one desk.</p>
+      <p class="ref-signoff">Sam Wang · 2026</p>
+    </div>
+  </footer>
+
+  </div><!-- /.page-main -->
+
+  <script src="script.js"></script>
+</body>
+</html>
