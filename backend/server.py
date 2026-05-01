@@ -59,7 +59,7 @@ GROQ_MODEL       = os.getenv('GROQ_MODEL', 'llama-3.3-70b-versatile')
 OLLAMA_URL       = os.getenv('OLLAMA_URL', '')
 OLLAMA_MODEL     = os.getenv('OLLAMA_MODEL', 'llama3.2')
 CAMERA_INDICES   = [int(x) for x in os.getenv('CAMERA_INDICES', '0').split(',')]
-YOLO_MODEL       = os.getenv('YOLO_MODEL', 'yolo26n.pt')  # Ultralytics YOLO26 nano; auto-downloads if needed
+YOLO_MODEL       = os.getenv('YOLO_MODEL', 'weights/yolo26n.pt')  # Ultralytics YOLO26 nano; auto-downloads if needed
 CONFIDENCE       = float(os.getenv('CONFIDENCE', '0.45'))
 # Cup/bottle/wine false positives are common; require higher conf to map → Glug.
 GLUG_MIN_CONF    = float(os.getenv('GLUG_MIN_CONF', '0.55'))
@@ -2606,6 +2606,10 @@ if __name__ == '__main__':
     print('═' * 56)
 
     _yolo_local = os.path.join(PROJECT_ROOT, YOLO_MODEL)
+    if not os.path.isfile(_yolo_local):
+        _alt = os.path.join(PROJECT_ROOT, 'weights', os.path.basename(YOLO_MODEL))
+        if os.path.isfile(_alt):
+            _yolo_local = _alt
     _yolo_arg = _yolo_local if os.path.isfile(_yolo_local) else YOLO_MODEL
     model = YOLO(_yolo_arg)
     print(f'  YOLO model : {YOLO_MODEL} ({_yolo_arg})')

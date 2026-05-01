@@ -3,24 +3,13 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Desk Talk — Your Desk Has Something to Say</title>
+  <title>Desk Talk — A calmer, smarter desk</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,600;1,6..72,400&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-
-  <!-- Character icons — same hand-drawn SVGs as the Desk Talk app (app.js CHAR_SVGS) -->
-  <svg xmlns="http://www.w3.org/2000/svg" style="position:absolute;width:0;height:0;overflow:hidden" aria-hidden="true">
-    <symbol id="icon-monty" viewBox="0 0 40 36"><rect x="3" y="2" width="34" height="22" rx="4" fill="#B4D3D9" stroke="#7EADB6" stroke-width="2.5"/><rect x="11" y="26" width="18" height="6" rx="3" fill="#CADEDF" stroke="#7EADB6" stroke-width="1.5"/><circle cx="15" cy="12" r="2.5" fill="#3D3552"/><circle cx="25" cy="12" r="2.5" fill="#3D3552"/><path d="M16 18Q20 15 24 18" stroke="#3D3552" stroke-width="2" stroke-linecap="round" fill="none"/></symbol>
-    <symbol id="icon-glug" viewBox="0 0 40 40"><path d="M10 10L12 34Q12 37 15 37H25Q28 37 28 34L30 10Z" fill="#A0C4C4" stroke="#6B9494" stroke-width="2.5"/><path d="M30 16Q36 16 36 22Q36 28 30 28" stroke="#6B9494" stroke-width="2.5" fill="none"/><circle cx="17" cy="22" r="2" fill="#2A3D3D"/><circle cx="24" cy="22" r="2" fill="#2A3D3D"/><ellipse cx="20" cy="28" rx="3" ry="2" stroke="#2A3D3D" stroke-width="1.5" fill="none"/><path d="M15 6Q17 2 19 6" stroke="#6B9494" stroke-width="1.5" stroke-linecap="round" fill="none"/><path d="M22 4Q24 0 26 4" stroke="#6B9494" stroke-width="1.5" stroke-linecap="round" fill="none"/></symbol>
-    <symbol id="icon-munch" viewBox="0 0 40 40"><path d="M20 4L36 36H4Z" fill="#D4A0A0" stroke="#A06060" stroke-width="2.5" stroke-linejoin="round"/><path d="M4 36Q12 32 20 36Q28 32 36 36" fill="#D4C4A0" stroke="#9A8560" stroke-width="2"/><circle cx="16" cy="22" r="2" fill="#3D2020"/><circle cx="24" cy="22" r="2" fill="#3D2020"/><path d="M17 28Q20 31 23 28" stroke="#3D2020" stroke-width="2" stroke-linecap="round" fill="none"/></symbol>
-    <symbol id="icon-sheets" viewBox="0 0 34 42"><path d="M2 2H24L32 10V40H2Z" fill="#D4C4A0" stroke="#9A8560" stroke-width="2.5" stroke-linejoin="round"/><path d="M24 2V10H32" stroke="#9A8560" stroke-width="2" stroke-linejoin="round" fill="#C4B490"/><circle cx="12" cy="20" r="2" fill="#3D3520"/><circle cx="22" cy="20" r="2" fill="#3D3520"/><path d="M14 26Q17 23 20 26" stroke="#3D3520" stroke-width="2" stroke-linecap="round" fill="none"/><path d="M8 32H24" stroke="#9A856044" stroke-width="1.5"/><path d="M8 36H18" stroke="#9A856044" stroke-width="1.5"/></symbol>
-    <symbol id="icon-zip" viewBox="0 0 44 36"><path d="M6 28Q6 10 18 10Q30 10 30 28" stroke="#6B8F6B" stroke-width="5" stroke-linecap="round" fill="none"/><circle cx="30" cy="28" r="7" fill="#A8BFA8" stroke="#6B8F6B" stroke-width="2.5"/><circle cx="28" cy="26" r="1.5" fill="#1E2E1E"/><circle cx="33" cy="26" r="1.5" fill="#1E2E1E"/><path d="M28 31Q31 33 33 31" stroke="#1E2E1E" stroke-width="1.5" stroke-linecap="round" fill="none"/><circle cx="6" cy="28" r="3" fill="#A8BFA8" stroke="#6B8F6B" stroke-width="1.5"/></symbol>
-    <symbol id="icon-surge" viewBox="0 0 36 40"><rect x="3" y="2" width="30" height="36" rx="6" fill="#BDA6CE" stroke="#9B8EC7" stroke-width="2.5"/><path d="M20 10L14 22H22L16 34" stroke="#2D2040" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/><circle cx="11" cy="12" r="2" fill="#2D2040"/><circle cx="25" cy="12" r="2" fill="#2D2040"/></symbol>
-    <symbol id="icon-buzz" viewBox="0 0 30 42"><rect x="2" y="2" width="26" height="38" rx="6" fill="#D4A0B8" stroke="#A06080" stroke-width="2.5"/><rect x="5" y="7" width="20" height="22" rx="3" fill="#F2EAE0"/><circle cx="11" cy="16" r="2.5" fill="#3D2030"/><circle cx="19" cy="16" r="2.5" fill="#3D2030"/><path d="M12 22Q15 25 18 22" stroke="#3D2030" stroke-width="2" stroke-linecap="round" fill="none"/><circle cx="15" cy="36" r="2" fill="#F2EAE0"/></symbol>
-  </svg>
 
   <aside class="site-contents" aria-label="Contents">
     <div class="site-contents-header">
@@ -31,34 +20,26 @@
     </div>
     <ol class="site-contents-list">
       <li><a href="#hero" data-contents>Intro</a></li>
-      <li><a href="#concept-video" data-contents>Live desk</a></li>
-      <li><a href="#problem" data-contents>Problem</a></li>
+      <li><a href="#product" data-contents>Main function</a></li>
+      <li><a href="#desk-hero" data-contents>Your desk</a></li>
       <li><a href="#scenarios" data-contents>Scenarios</a></li>
-      <li><a href="#concept" data-contents>Approach</a></li>
-      <li><a href="#hardware" data-contents>Hardware</a></li>
-      <li><a href="#pipeline" data-contents>System</a></li>
-      <li><a href="#characters" data-contents>Cast</a></li>
-      <li><a href="#relationships" data-contents>Relations</a></li>
-      <li><a href="#demo" data-contents>Gallery</a></li>
+      <li><a href="#alerts" data-contents>App alerts</a></li>
+      <li><a href="#why" data-contents>Why Desk Talk</a></li>
       <li><a href="#contact" data-contents>Contact</a></li>
     </ol>
   </aside>
 
   <div class="page-main">
-  <nav class="nav">
+  <nav class="nav nav--product">
     <div class="nav-leading">
       <a href="#hero" class="nav-logo">Desk Talk</a>
       <a href="../" class="nav-app-demo">App demo</a>
     </div>
     <div class="nav-links">
-      <a href="#problem">Problem</a>
+      <a href="#product">Main function</a>
       <a href="#scenarios">Scenarios</a>
-      <a href="#concept">Approach</a>
-      <a href="#hardware">Hardware</a>
-      <a href="#pipeline">System</a>
-      <a href="#characters">Cast</a>
-      <a href="#concept-video">Live desk</a>
-      <a href="#demo">Gallery</a>
+      <a href="#alerts">Alerts</a>
+      <a href="#why">Why Desk Talk</a>
       <a href="#contact" class="nav-contact">Contact</a>
     </div>
     <button type="button" class="nav-toggle" aria-label="Menu" aria-expanded="false">
@@ -66,452 +47,150 @@
     </button>
   </nav>
 
-  <!-- ═══════════ HERO ═══════════ -->
-  <section id="hero" class="hero">
-    <div class="ref-measure ref-measure--wide hero-inner reveal">
-      <h1 class="hero-title">Desk Talk</h1>
-      <p class="ref-lede">A camera watches your desk. Objects talk to you about risks, lost items, and daily habits — so the nudge lands before the damage does.</p>
-      <p class="ref-prose">YOLOv8 tracks everything on the desk. The system detects danger, finds lost objects, and builds healthy habits — all delivered as in-character dialogue through a group chat. Flask + Ollama make it real-time.</p>
+  <!-- HERO -->
+  <section id="hero" class="hero hero--product">
+    <div class="hero-product-inner reveal">
+      <p class="hero-eyebrow">Desk intelligence · Chat-first</p>
+      <h1 class="hero-title hero-title--product">Your desk,<br><span class="hero-accent">understood.</span></h1>
+      <p class="hero-lead">One camera. One calm interface. Desk Talk watches your workspace and turns what it sees into small, timely reminders — so spills, clutter, and lost items never sneak up on you.</p>
+      <div class="hero-cta-row">
+        <a href="#product" class="btn-primary">How it works</a>
+        <a href="../" class="btn-ghost">Open the app demo</a>
+      </div>
     </div>
   </section>
 
-  <!-- ═══════════ LIVE DESK SHOWCASE — Full bleed ═══════════ -->
-  <section id="concept-video" class="showcase showcase-video" data-speed="0.2">
-    <div class="showcase-bg">
-      <img src="live-feed-screenshot.jpg" alt="" class="showcase-vid" width="1920" height="1080" decoding="async">
-    </div>
-    <div class="showcase-overlay"></div>
-    <div class="showcase-caption reveal">
-      <span class="showcase-tag">The Setup</span>
-      <h2>One camera. One desk.<br>Risk detection, lost objects, and daily habits.</h2>
-    </div>
-  </section>
-
-  <!-- ═══════════ PROBLEM ═══════════ -->
-  <section id="problem" class="ref-section">
+  <!-- MAIN FUNCTION -->
+  <section id="product" class="ref-section section-tight">
     <div class="ref-measure ref-measure--wide reveal">
-      <h2 class="ref-h2">The problem</h2>
-      <p class="ref-prose">Your desk is a blindspot. A cup drifts toward the laptop. Your phone sits face-up during deep work. Keys vanish under a pile of papers. You sit for three hours without moving. None of it registers until something spills, breaks, or disappears.</p>
-      <p class="ref-prose">Reminder apps get snoozed. Alarms feel clinical. This project reframes the desk as a living ecosystem — a camera sees what you miss, and the objects themselves speak up through a group chat. The tone is personality-driven humor, not surveillance.</p>
-    </div>
-    <div class="media-strip">
-      <figure class="ref-placeholder reveal">
-        <img src="cast-lineup.jpg" alt="Round table chat hub showing Monty, Glug, Munch, Sheets, and The Desk" class="img-phone">
-        <figcaption class="ref-placeholder-cap">The cast — four desk objects and a shared group channel</figcaption>
-      </figure>
+      <p class="section-kicker">Main function</p>
+      <h2 class="ref-h2 ref-h2--product">Manage your desk in a simpler, smarter way.</h2>
+      <p class="ref-prose ref-prose--large">Desk Talk uses a camera and a chat-style interface to track what is on your desk and turn everyday objects into gentle reminders that keep you organized and focused. It can warn you about spills or clutter, remind you to take breaks and stay on track, and help you find items you have misplaced. It works quietly in the background so your workspace stays cleaner, calmer, and easier to run all day.</p>
     </div>
   </section>
 
-  <!-- ═══════════ SCENARIOS ═══════════ -->
+  <!-- FULL-BLEED DESK VISUAL -->
+  <section id="desk-hero" class="showcase showcase-video showcase--scene" data-speed="0.18">
+    <div class="showcase-bg">
+      <img src="assets/scenes/HabitProject_sceneExample1.jpg" alt="Illustration: liquids, snacks, and a pet too close to a computer" class="showcase-vid" width="1920" height="1080" decoding="async" fetchpriority="high">
+    </div>
+    <div class="showcase-overlay showcase-overlay--dark"></div>
+    <div class="showcase-caption reveal">
+      <span class="showcase-tag">Scenario 1 · Safety</span>
+      <h2>Keep hazards away<br>from your computer.</h2>
+      <p class="showcase-sub">Liquids, food, pets, or clutter crowding the machine — Desk Talk flags the risk before something goes wrong.</p>
+    </div>
+  </section>
+
+  <!-- THREE SCENARIOS -->
   <section id="scenarios" class="ref-section">
     <div class="ref-measure ref-measure--wide reveal">
-      <h2 class="ref-h2">Scenarios</h2>
-      <p class="ref-prose">The system doesn’t do one thing — it handles three distinct scenario categories, each with multiple sub-features running simultaneously through the same camera feed.</p>
+      <p class="section-kicker">Three scenes</p>
+      <h2 class="ref-h2 ref-h2--product">What we watch for</h2>
+      <p class="ref-prose">Each scene matches a real desk moment. The illustrations below are the same storyboard style the product uses to explain behavior — clear, minimal, and focused on the object that matters.</p>
     </div>
 
-    <div class="media-strip">
-      <figure class="ref-placeholder reveal">
-        <img src="scenarios-flowchart.png" alt="Scenario tree — risk detection, lost objects, and reminders with sub-features" class="img-light-bg">
-        <figcaption class="ref-placeholder-cap">Scenario framework — the three pillars and their sub-features</figcaption>
-      </figure>
+    <div class="scene-stack">
+      <article class="scene-block reveal">
+        <div class="scene-block__media">
+          <img src="assets/scenes/HabitProject_sceneExample1.jpg" alt="Scene 1: spills, snacks, pet near laptop" loading="lazy" decoding="async">
+        </div>
+        <div class="scene-block__copy">
+          <span class="scene-num">01</span>
+          <h3 class="scene-title">Hazards near your computer</h3>
+          <p class="scene-body">Water or risky items too close to the machine, pets on the desk, or strangers and clutter crowding your screen zone — you get a clear heads-up so you can react before damage or distraction.</p>
+        </div>
+      </article>
+
+      <article class="scene-block scene-block--reverse reveal">
+        <div class="scene-block__media">
+          <img src="assets/scenes/HabitProject_sceneExample2.jpg" alt="Scene 2: headphones, phone, and keys on desk" loading="lazy" decoding="async">
+        </div>
+        <div class="scene-block__copy">
+          <span class="scene-num">02</span>
+          <h3 class="scene-title">Your things, accounted for</h3>
+          <p class="scene-body">Headphones, phone, keys, and other small items appear on your desk — Desk Talk helps you notice what is present, what moved, and what might walk away so your essentials stay organized.</p>
+        </div>
+      </article>
+
+      <article class="scene-block reveal">
+        <div class="scene-block__media">
+          <img src="assets/scenes/HabitProject_sceneExample3.jpg" alt="Scene 3: posture, distance, hydration, plants" loading="lazy" decoding="async">
+        </div>
+        <div class="scene-block__copy">
+          <span class="scene-num">03</span>
+          <h3 class="scene-title">Habits that add up</h3>
+          <p class="scene-body">Posture checks, sitting too close to the screen, drinking water, and even watering plants — light nudges tied to how you actually use the desk, not generic alarms.</p>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <!-- APP ALERTS (MOCK UI) -->
+  <section id="alerts" class="ref-section section-alt">
+    <div class="ref-measure ref-measure--wide reveal">
+      <p class="section-kicker">Interaction</p>
+      <h2 class="ref-h2 ref-h2--product">What shows up in the app</h2>
+      <p class="ref-prose">Alerts read like messages from your desk — short, specific, and easy to act on. Below are examples of the kinds of notifications Desk Talk can surface.</p>
     </div>
 
-    <div class="ref-measure ref-measure--wide">
-      <div class="scenario-grid">
-
-        <div class="scenario-card scenario-card--risk reveal">
-          <div class="scenario-card-header">
-            <span class="scenario-icon">🛡️</span>
-            <h3 class="scenario-title">Risk Detection</h3>
-          </div>
-          <p class="scenario-desc">Camera watches spatial relationships between objects and flags danger before anything spills, falls, or breaks.</p>
-          <ul class="scenario-features">
-            <li><strong>Object Danger</strong><span>Cup near laptop, snack on papers — proximity and zone intrusion triggers dialogue</span></li>
-            <li><strong>Pet Risk</strong><span>Cat or dog detected near the desk — warns about knocked drinks, chewed cables, scattered papers</span></li>
-            <li><strong>Edge Proximity</strong><span>Objects drifting toward the edge of the desk surface — fall risk before it happens</span></li>
-          </ul>
+    <div class="alert-mock-grid">
+      <div class="alert-mock alert-mock--danger reveal">
+        <div class="alert-mock__top">
+          <span class="alert-mock__app">Desk Talk</span>
+          <span class="alert-mock__time">now</span>
         </div>
-
-        <div class="scenario-card scenario-card--lost reveal">
-          <div class="scenario-card-header">
-            <span class="scenario-icon">🔍</span>
-            <h3 class="scenario-title">Lost Object Tracking</h3>
-          </div>
-          <p class="scenario-desc">Tracks when small items were last seen on the desk. If something disappears for too long, the group chat alerts you.</p>
-          <ul class="scenario-features">
-            <li><strong>Phone</strong><span>Alerts when your phone hasn’t been seen for 10+ minutes</span></li>
-            <li><strong>Keys</strong><span>Tracks when keys were last on the desk — “last seen 15 min ago”</span></li>
-            <li><strong>Wallet / Cards</strong><span>Logs wallet or card-like objects — notifies if they vanish</span></li>
-          </ul>
+        <p class="alert-mock__title">Cat too close to your laptop</p>
+        <p class="alert-mock__body">A pet is in the spill zone near liquids and your screen. Give them a nudge away from the desk.</p>
+      </div>
+      <div class="alert-mock alert-mock--warn reveal">
+        <div class="alert-mock__top">
+          <span class="alert-mock__app">Desk Talk</span>
+          <span class="alert-mock__time">2m ago</span>
         </div>
-
-        <div class="scenario-card scenario-card--remind reveal">
-          <div class="scenario-card-header">
-            <span class="scenario-icon">⏰</span>
-            <h3 class="scenario-title">Reminders</h3>
-          </div>
-          <p class="scenario-desc">Habit coaching built into the detection loop — some triggered by vision, some by timers, all delivered in character.</p>
-          <ul class="scenario-features">
-            <li><strong>Take a Break</strong><span>Auto-detects when you leave for 5+ min — logs it, welcomes you back</span></li>
-            <li><strong>Hydration</strong><span>Auto-logs sips when the cup leaves the desk and returns</span></li>
-            <li><strong>Healthy Eating</strong><span>Auto-detects food via YOLO and rates your choices (apple vs pizza)</span></li>
-            <li><strong>Focus Mode</strong><span>Phone on desk for 5+ min during work? Sheets nudges you to put it away</span></li>
-            <li><strong>Desk Organization</strong><span>Too many objects detected? A gentle nudge to tidy up</span></li>
-            <li><strong>Posture Check</strong><span>Periodic reminders to sit up straight, stretch, and roll your shoulders</span></li>
-            <li><strong>Screen Time</strong><span>Tracks continuous desk presence — warns at 45+ min without a break</span></li>
-            <li><strong>Water Plants</strong><span>Daily time-based reminder — have you watered your plants today?</span></li>
-          </ul>
+        <p class="alert-mock__title">Phone beside your keyboard</p>
+        <p class="alert-mock__body">Your phone has been next to the work area for a while. Want to tuck it away for focus?</p>
+      </div>
+      <div class="alert-mock alert-mock--info reveal">
+        <div class="alert-mock__top">
+          <span class="alert-mock__app">Desk Talk</span>
+          <span class="alert-mock__time">session</span>
         </div>
-
+        <p class="alert-mock__title">Last hour · quick recap</p>
+        <p class="alert-mock__body">Posture flagged 3 times · sat too close to the screen 2 times · hydration reminder sent once. Tap any line to see details.</p>
       </div>
     </div>
-  </section>
 
-  <!-- ═══════════ CONCEPT ═══════════ -->
-  <section id="concept" class="ref-section">
-    <div class="ref-measure ref-measure--wide reveal">
-      <h2 class="ref-h2">Approach</h2>
-      <p class="ref-prose"><strong>Observe.</strong> One webcam; YOLOv8 keeps bounding boxes on objects, people, and pets in every frame.</p>
-      <p class="ref-prose"><strong>Detect.</strong> Edge proximity, danger zones, chain analysis, temporal drift, person presence, and object disappearance — not a single distance threshold but layered scenario passes.</p>
-      <p class="ref-prose"><strong>Converse.</strong> When something triggers, a local LLM (Ollama) writes the line; objects stay in voice and context-aware.</p>
-      <p class="ref-prose"><strong>Nudge.</strong> The tone is personality and humor, not alarms — enough to glance down and fix the layout, drink water, or find your keys.</p>
-      <p class="ref-pull">“I feel a little tense… that cup is getting closer.” <span class="ref-pull-cite">— Monty</span></p>
-    </div>
-  </section>
-
-  <!-- ═══════════ HARDWARE ═══════════ -->
-  <section id="hardware" class="ref-section">
-    <div class="ref-measure ref-measure--wide reveal">
-      <h2 class="ref-h2">Hardware</h2>
-      <p class="ref-prose">One eMeet C960 on a small tripod, dead center in front of the desk, tilted down so the frame covers keyboard, papers, and the usual debris. 1080p, roughly a 90° field of view, USB into OpenCV — no exotic drivers. The photo below is the actual setup.</p>
-    </div>
-
-    <div class="media-strip">
-      <figure class="desk-photo-figure reveal">
-        <div class="desk-photo-wrap">
-          <img src="desk-photo.jpg" alt="Physical desk setup with laptop, water bottle, and eMeet camera on tripod" class="desk-photo-img">
-          <!-- Annotation: Monty (Laptop) -->
-          <div class="desk-label desk-label--monty" style="top:22%;left:53%;">
-            <span class="desk-label-dot"></span>
-            <span class="desk-label-line"></span>
-            <span class="desk-label-tag">Monty <small>— laptop</small></span>
-          </div>
-          <!-- Annotation: Glug (Water bottle) -->
-          <div class="desk-label desk-label--glug" style="top:50%;left:30%;">
-            <span class="desk-label-dot"></span>
-            <span class="desk-label-line"></span>
-            <span class="desk-label-tag">Glug <small>— water bottle</small></span>
-          </div>
-          <!-- Annotation: eMeet Camera -->
-          <div class="desk-label desk-label--cam" style="top:68%;left:48%;">
-            <span class="desk-label-dot"></span>
-            <span class="desk-label-line"></span>
-            <span class="desk-label-tag">eMeet C960 <small>— webcam</small></span>
-          </div>
-        </div>
-        <figcaption class="ref-placeholder-cap">Actual desk setup — eMeet C960 on tripod, laptop, and water bottle</figcaption>
-      </figure>
-    </div>
-
-
-    <div class="ref-measure ref-measure--wide">
-      <!-- ── Specs ── -->
-      <div class="hw-specs-grid">
-        <div class="hw-spec-card reveal">
-          <h3>Camera Model</h3>
-          <div class="hw-spec-detail">
-            <span class="hw-spec-value">eMeet C960</span>
-            <p>1080p Full HD webcam with built-in dual microphones, wide-angle glass lens, and automatic low-light correction. Plug-and-play USB — no drivers needed. Compatible with OpenCV's VideoCapture interface out of the box.</p>
-          </div>
-          <div class="hw-spec-row">
-            <div class="hw-spec-item">
-              <span class="hw-spec-label">Resolution</span>
-              <span class="hw-spec-val">1920 × 1080</span>
-            </div>
-            <div class="hw-spec-item">
-              <span class="hw-spec-label">Frame Rate</span>
-              <span class="hw-spec-val">30 FPS</span>
-            </div>
-            <div class="hw-spec-item">
-              <span class="hw-spec-label">Field of View</span>
-              <span class="hw-spec-val">90°</span>
-            </div>
-            <div class="hw-spec-item">
-              <span class="hw-spec-label">Interface</span>
-              <span class="hw-spec-val">USB 2.0</span>
-            </div>
-          </div>
-        </div>
-
-        <div class="hw-spec-card reveal">
-          <h3>Placement</h3>
-          <div class="hw-spec-detail">
-            <span class="hw-spec-value">Front-facing on Stand</span>
-            <p>Mounted on a tripod stand directly in front of the desk, angled slightly downward. The 90° wide-angle lens covers the full desk surface from edge to edge — a single camera captures all objects and their spatial relationships.</p>
-          </div>
-          <div class="hw-spec-row">
-            <div class="hw-spec-item">
-              <span class="hw-spec-label">Position</span>
-              <span class="hw-spec-val">Front of desk</span>
-            </div>
-            <div class="hw-spec-item">
-              <span class="hw-spec-label">Angle</span>
-              <span class="hw-spec-val">~30° downward</span>
-            </div>
-            <div class="hw-spec-item">
-              <span class="hw-spec-label">Streaming</span>
-              <span class="hw-spec-val">MJPEG via Flask</span>
-            </div>
-            <div class="hw-spec-item">
-              <span class="hw-spec-label">Detection</span>
-              <span class="hw-spec-val">YOLOv8n (CPU)</span>
-            </div>
-          </div>
-        </div>
-      </div>
-
-    </div>
-
-    <div class="media-strip">
-      <figure class="ref-placeholder reveal">
-        <img src="live-feed-screenshot.jpg" alt="App screenshot showing live camera feed with YOLO detection overlays and danger alerts" class="img-phone">
-        <figcaption class="ref-placeholder-cap">Live detection feed — YOLO bounding boxes, danger alerts, and group chat in action</figcaption>
-      </figure>
-    </div>
-  </section>
-
-  <!-- ═══════════ PIPELINE ═══════════ -->
-  <section id="pipeline" class="ref-section">
-    <div class="ref-measure ref-measure--wide reveal">
-      <h2 class="ref-h2">System</h2>
-      <p class="ref-prose">Every frame runs through YOLOv8 for object, person, and pet detection. Then the scenario engine fires: risk passes check proximity and zones, the lost-object tracker logs disappearances, and the reminder engine monitors presence, screen time, and habits. When everything’s fine, the server updates state quietly. When something triggers, Ollama drafts an in-character line and the chat moves.</p>
-    </div>
-    <div class="media-strip">
-      <figure class="ref-placeholder reveal">
-        <img src="pipeline-flowchart.png" alt="System pipeline — object recognition, distance estimation, chain analysis, temporal detection, and message generation" class="img-light-bg">
-        <figcaption class="ref-placeholder-cap">System pipeline — detection to dialogue</figcaption>
-      </figure>
-    </div>
-    <div class="ref-measure ref-measure--wide reveal">
-      <h2 class="ref-h2 ref-h2--sub">How detection works across scenarios</h2>
-      <p class="ref-prose">After YOLOv8 labels each object, person, and pet, the backend runs multiple detection passes in parallel. Each scenario category uses different logic:</p>
-      <ul class="danger-detect-list">
-        <li><strong>Danger zones</strong> — Each object class carries an expanded margin in pixels. If another object enters that padded region, it counts as a spatial conflict. Configurable in Safety Rules.</li>
-        <li><strong>Centroid distance</strong> — Pairs of objects are compared by center-to-center distance against safe thresholds so “too close” doesn’t depend only on overlapping boxes.</li>
-        <li><strong>Chain / sandwich</strong> — Checks whether a third object sits between two others (e.g., something between a drink and the keyboard), predicting knock-over paths.</li>
-        <li><strong>Temporal drift</strong> — Short-term history catches risks that build slowly: objects creeping closer frame by frame.</li>
-        <li><strong>Person presence</strong> — Tracks when a person is at the desk. Absence of 5+ minutes logs a break; continuous presence of 45+ minutes triggers a screen-time warning.</li>
-        <li><strong>Object disappearance</strong> — Small items (phone, keys, wallet) are tracked. When they vanish from the frame for 10+ minutes, a lost-object alert fires in group chat.</li>
-        <li><strong>Pet detection</strong> — Cats and dogs near the desk trigger immediate pet-risk warnings — knocked cups, chewed cables, scattered papers.</li>
-        <li><strong>Distraction tracking</strong> — Phone presence on the desk during a work session is monitored. 5+ minutes triggers a focus nudge from Sheets.</li>
+    <div class="container-narrow reveal stat-pills-wrap">
+      <p class="ref-prose stat-pills-intro">Examples of summaries you might see after a focused work block:</p>
+      <ul class="stat-pills" aria-label="Example session stats">
+        <li><strong>3</strong> posture nudges</li>
+        <li><strong>2</strong> “too close” prompts</li>
+        <li><strong>1</strong> hydration reminder</li>
+        <li><strong>0</strong> spill risks (great)</li>
       </ul>
-      <p class="ref-prose">When all passes say “safe,” the server updates state quietly. When any pass triggers, Ollama drafts an in-character line for the appropriate chat.</p>
     </div>
   </section>
 
-  <!-- ═══════════ CHARACTERS + RELATIONSHIPS ═══════════ -->
-  <section id="characters" class="ref-section">
+  <!-- WHY -->
+  <section id="why" class="ref-section">
     <div class="ref-measure ref-measure--wide reveal">
-      <h2 class="ref-h2">Cast</h2>
-      <p class="ref-prose">Four objects on the desk — each with a personality, unique detection behaviors, and a role across the three scenarios.</p>
-      <p class="ref-prose"><strong>Monty</strong> — laptop / keyboard. Anxious center of the desk. Handles break detection, posture reminders, and screen time tracking. Panics when cups get too close.</p>
-      <p class="ref-prose"><strong>Glug</strong> — cup / bottle. Oblivious hydration coach. Auto-logs sips when picked up and put down. Also delivers plant-watering reminders. Doesn’t understand why everyone panics around it.</p>
-      <p class="ref-prose"><strong>Munch</strong> — snack / food. Hedonist. Auto-detects food items via camera and rates healthy vs junk. Unapologetic about crumbs near the keyboard.</p>
-      <p class="ref-prose"><strong>Sheets</strong> — paper / homework. Gentle and anxious. Manages to-do lists, focus mode (phone distraction alerts), desk organization nudges, and lost object tracking.</p>
-
-    </div>
-    <div class="media-strip">
-      <div class="ref-placeholder-grid">
-        <figure class="ref-placeholder ref-placeholder--tile reveal">
-          <img src="cast-lineup.jpg" alt="App screenshot showing the round table chat list with Monty, Glug, Munch, Sheets, and The Desk hub">
-          <figcaption class="ref-placeholder-cap">Cast lineup — round table chat hub</figcaption>
-        </figure>
-        <figure class="ref-placeholder ref-placeholder--tile reveal">
-          <img src="habit-reminder.jpg" alt="Glug's hydration tracker with sip counter ring and habit coaching chat">
-          <figcaption class="ref-placeholder-cap">Private habit threads — Glug's hydration tracker</figcaption>
-        </figure>
-      </div>
-    </div>
-    <div class="ref-measure ref-measure--wide reveal">
-      <h2 class="ref-h2 ref-h2--sub" id="relationships">How they relate</h2>
-      <p class="ref-prose">Sample pairs the risk detection scenario watches — danger is staged for dialogue, not a siren. The same spatial data feeds into lost-object and reminder scenarios too.</p>
-    </div>
-
-    <div class="media-strip">
-      <div class="rel-cards-grid reveal">
-        <div class="rel-card rel-card--no-photo">
-          <div class="rel-card-body">
-            <div class="rel-card-pair">
-              <span class="rel-card-obj"><svg class="rel-ico" width="22" height="22" viewBox="0 0 40 40" aria-hidden="true"><use href="#icon-glug"/></svg> Cup</span>
-              <span class="rel-card-arrow">→</span>
-              <span class="rel-card-obj"><svg class="rel-ico" width="22" height="20" viewBox="0 0 40 36" aria-hidden="true"><use href="#icon-monty"/></svg> Laptop</span>
-            </div>
-            <span class="risk critical">Critical</span>
-            <p class="rel-card-desc">Liquid spill — existential threat to keyboard and screen</p>
-          </div>
-        </div>
-        <div class="rel-card rel-card--no-photo">
-          <div class="rel-card-body">
-            <div class="rel-card-pair">
-              <span class="rel-card-obj"><svg class="rel-ico" width="22" height="22" viewBox="0 0 40 40" aria-hidden="true"><use href="#icon-munch"/></svg> Snack</span>
-              <span class="rel-card-arrow">→</span>
-              <span class="rel-card-obj"><svg class="rel-ico" width="22" height="20" viewBox="0 0 40 36" aria-hidden="true"><use href="#icon-monty"/></svg> Laptop</span>
-            </div>
-            <span class="risk high">High</span>
-            <p class="rel-card-desc">Crumb contamination on keyboard</p>
-          </div>
-        </div>
-        <div class="rel-card rel-card--no-photo">
-          <div class="rel-card-body">
-            <div class="rel-card-pair">
-              <span class="rel-card-obj"><svg class="rel-ico" width="22" height="22" viewBox="0 0 40 40" aria-hidden="true"><use href="#icon-glug"/></svg> Cup</span>
-              <span class="rel-card-arrow">→</span>
-              <span class="rel-card-obj"><svg class="rel-ico" width="20" height="24" viewBox="0 0 34 42" aria-hidden="true"><use href="#icon-sheets"/></svg> Paper</span>
-            </div>
-            <span class="risk high">High</span>
-            <p class="rel-card-desc">Water damage to documents</p>
-          </div>
-        </div>
-        <div class="rel-card rel-card--no-photo">
-          <div class="rel-card-body">
-            <div class="rel-card-pair">
-              <span class="rel-card-obj"><svg class="rel-ico" width="22" height="22" viewBox="0 0 40 40" aria-hidden="true"><use href="#icon-munch"/></svg> Snack</span>
-              <span class="rel-card-arrow">→</span>
-              <span class="rel-card-obj"><svg class="rel-ico" width="20" height="24" viewBox="0 0 34 42" aria-hidden="true"><use href="#icon-sheets"/></svg> Paper</span>
-            </div>
-            <span class="risk medium">Medium</span>
-            <p class="rel-card-desc">Oil and grease stains on homework</p>
-          </div>
-        </div>
-      </div>
+      <p class="section-kicker">Why it matters</p>
+      <h2 class="ref-h2 ref-h2--product">More than notifications.</h2>
+      <p class="ref-prose ref-prose--large">Most tools shout at you. Desk Talk is built around the idea that your desk already tells a story — objects, distance, light habits. When that story is translated into a calm chat, you get fewer surprises, less damage, and a workspace that feels intentional instead of chaotic. It is the same care you see in premium hardware brands: simple on the surface, serious underneath.</p>
+      <p class="ref-prose">Under the hood: computer vision for what is on the desk, lightweight rules for risk and presence, and a conversational layer so every alert feels human-sized — not a dashboard, not a siren.</p>
     </div>
   </section>
 
-  <!-- ═══════════ DEMO CAROUSEL ═══════════ -->
-  <section id="demo" class="ref-section demo-section">
-    <div class="ref-measure ref-measure--wide reveal">
-      <h2 class="ref-h2">Gallery</h2>
-      <p class="ref-prose">Screenshots from the actual app — arrows to step through, or let it advance on its own.</p>
-    </div>
-
-    <div class="media-strip media-strip--carousel">
-    <div class="carousel reveal">
-      <div class="carousel-track">
-        <div class="carousel-slide active">
-          <div class="slide-image">
-            <img class="slide-photo" src="groupchat-interface.png" alt="The Desk group chat with risk alerts and in-character dialogue" loading="lazy" decoding="async">
-          </div>
-          <div class="slide-info">
-            <span class="slide-num">01 / 08</span>
-            <h3>Group Chat</h3>
-            <p>The main group chat where all desk objects communicate about detected risks, lost items, and habits in real time. Each character has a unique personality and bubble style.</p>
-          </div>
-        </div>
-        <div class="carousel-slide">
-          <div class="slide-image">
-            <img class="slide-photo" src="cast-lineup.jpg" alt="Round table chat hub with Monty, Glug, Munch, Sheets" loading="lazy" decoding="async">
-          </div>
-          <div class="slide-info">
-            <span class="slide-num">02 / 08</span>
-            <h3>Chat Hub</h3>
-            <p>The round table layout — a central group chat surrounded by four private character chats. Each object has its own personality and manages different scenarios.</p>
-          </div>
-        </div>
-        <div class="carousel-slide">
-          <div class="slide-image">
-            <img class="slide-photo" src="llm-conversation.jpg" alt="Monty’s private chat with break timer and posture reminders" loading="lazy" decoding="async">
-          </div>
-          <div class="slide-info">
-            <span class="slide-num">03 / 08</span>
-            <h3>Break & Posture Tracking</h3>
-            <p>Monty auto-detects when you leave for 5+ minutes and logs a break. Also sends periodic posture and screen-time reminders — all through conversation.</p>
-          </div>
-        </div>
-        <div class="carousel-slide">
-          <div class="slide-image">
-            <img class="slide-photo" src="habit-reminder.jpg" alt="Glug’s hydration tracker with sip ring and plant reminders" loading="lazy" decoding="async">
-          </div>
-          <div class="slide-info">
-            <span class="slide-num">04 / 08</span>
-            <h3>Hydration & Plant Care</h3>
-            <p>Glug auto-logs sips when you pick up and put down the cup. Also handles daily plant-watering reminders. The progress ring tracks your goal.</p>
-          </div>
-        </div>
-        <div class="carousel-slide">
-          <div class="slide-image">
-            <img class="slide-photo" src="munch-monty-detection.jpg" alt="Munch’s snack log with auto-detected food items" loading="lazy" decoding="async">
-          </div>
-          <div class="slide-info">
-            <span class="slide-num">05 / 08</span>
-            <h3>Snack Detection</h3>
-            <p>Munch auto-detects food on the desk via YOLO and rates your choices. Healthy snacks get a green tag, junk food gets a nudge. Manual logging available too.</p>
-          </div>
-        </div>
-        <div class="carousel-slide">
-          <div class="slide-image">
-            <img class="slide-photo" src="sheets-focus.jpg" alt="Sheets’ chat with focus mode, lost object alerts, and to-do list" loading="lazy" decoding="async">
-          </div>
-          <div class="slide-info">
-            <span class="slide-num">06 / 08</span>
-            <h3>Focus & Organization</h3>
-            <p>Sheets manages your to-do list, nudges you when your phone is distracting you, alerts about lost objects (phone, keys, wallet), and monitors desk clutter.</p>
-          </div>
-        </div>
-        <div class="carousel-slide">
-          <div class="slide-image">
-            <img class="slide-photo" src="safety-rules-configuration.png" alt="Safety Rules configuration screen" loading="lazy" decoding="async">
-          </div>
-          <div class="slide-info">
-            <span class="slide-num">07 / 08</span>
-            <h3>Safety Rules</h3>
-            <p>Configure danger zones per object class: set pixel margins, define named zones, and control how sensitive risk detection is for each scenario.</p>
-          </div>
-        </div>
-        <div class="carousel-slide">
-          <div class="slide-image">
-            <img class="slide-photo" src="live-mode.jpg" alt="Live desk view in demo mode" loading="lazy" decoding="async">
-          </div>
-          <div class="slide-info">
-            <span class="slide-num">08 / 08</span>
-            <h3>Live Desk View</h3>
-            <p>TikTok-style full-screen view of the live camera feed with real-time detection overlays and floating chat messages (danmu). Toggle between live and demo mode.</p>
-          </div>
-        </div>
-      </div>
-
-      <button class="carousel-btn carousel-prev" aria-label="Previous slide">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
-      </button>
-      <button class="carousel-btn carousel-next" aria-label="Next slide">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
-      </button>
-
-      <div class="carousel-dots">
-        <button class="carousel-dot active" data-idx="0"></button>
-        <button class="carousel-dot" data-idx="1"></button>
-        <button class="carousel-dot" data-idx="2"></button>
-        <button class="carousel-dot" data-idx="3"></button>
-        <button class="carousel-dot" data-idx="4"></button>
-        <button class="carousel-dot" data-idx="5"></button>
-        <button class="carousel-dot" data-idx="6"></button>
-        <button class="carousel-dot" data-idx="7"></button>
-      </div>
-
-      <div class="carousel-progress"><div class="carousel-progress-bar"></div></div>
-    </div>
-    </div>
-  </section>
-
-  <footer class="footer ref-footer" id="contact">
+  <footer class="footer ref-footer footer--product" id="contact">
     <div class="ref-measure ref-measure--wide ref-footer-inner">
       <h2 class="ref-h2">Stack</h2>
-      <p class="ref-pipes">Python · OpenCV · YOLOv8 · Flask · SSE · Ollama · HTML / JS</p>
+      <p class="ref-pipes">Python · OpenCV · YOLO · Flask · SSE · Local LLM · Web</p>
       <h2 class="ref-h2">Contact</h2>
       <p class="ref-contact-links">
         <a href="#" class="ref-arrow-link">GitHub</a>
-        <a href="#" class="ref-arrow-link">Documentation</a>
       </p>
-      <p class="ref-bio">Student project — computer vision, local LLM, and object personas that detect risks, find lost items, and build better habits.</p>
+      <p class="ref-bio">Desk Talk — student project. Computer vision meets a calmer desk.</p>
       <p class="ref-signoff">Sam Wang · 2026</p>
     </div>
   </footer>

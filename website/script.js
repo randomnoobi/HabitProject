@@ -49,8 +49,7 @@ if (navToggle && navEl) {
 
 // ═══ Scroll spy: nav + Contents sidebar + read progress bar ═══
 const SECTION_ORDER = [
-  'hero', 'concept-video', 'problem', 'concept', 'hardware', 'pipeline',
-  'characters', 'relationships', 'demo', 'contact',
+  'hero', 'product', 'desk-hero', 'scenarios', 'alerts', 'why', 'contact',
 ];
 
 function updateScrollUi() {

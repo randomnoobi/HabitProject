@@ -285,7 +285,9 @@ Habit Project/
 ├── scripts/
 │   ├── cameraOpen.py         # Camera preview + snapshot
 │   └── cameraRecognition.py  # YOLO webcam preview
-├── website/                  # Marketing / case study (GitHub Pages)
+├── website/                  # Marketing site (GitHub Pages)
+│   └── assets/scenes/        # Scene illustrations only
+├── weights/                    # YOLO weights (local; *.pt gitignored)
 └── docs/                     # Design notes
 ```
 
@@ -385,7 +387,7 @@ Pushing to **`main`** runs [`.github/workflows/deploy-pages.yml`](.github/workfl
 3. Open the **Actions** tab and confirm the **Deploy site to GitHub Pages** workflow succeeds.
 4. Your site URL will be `https://<username>.github.io/<repo>/` (unless you use a custom domain).
 
-Model weights (`*.pt`) stay gitignored; place them in the project root or set `YOLO_MODEL` / `PIPELINE_MODEL` accordingly.
+Model weights (`*.pt`) are gitignored by default. Put them in **`weights/`** (defaults: `weights/yolo26n.pt`) or set `YOLO_MODEL` / `PIPELINE_MODEL` to another path.
 
 ---
 

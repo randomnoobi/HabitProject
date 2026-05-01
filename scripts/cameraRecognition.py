@@ -5,7 +5,10 @@ from ultralytics import YOLO
 
 def main():
     cam_index = 0
-    model = YOLO(os.getenv('YOLO_MODEL', 'yolo26n.pt'))
+    _root = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
+    _rel = os.getenv('YOLO_MODEL', 'weights/yolo26n.pt')
+    _path = _rel if os.path.isabs(_rel) else os.path.join(_root, _rel)
+    model = YOLO(_path)
 
     cap = cv2.VideoCapture(cam_index)
     if not cap.isOpened():

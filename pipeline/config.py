@@ -37,7 +37,7 @@ VIDEO_SOURCE = os.getenv('PIPELINE_VIDEO', '')
 # ---------------------------------------------------------------------------
 #  Object Detection
 # ---------------------------------------------------------------------------
-MODEL_PATH = os.getenv('PIPELINE_MODEL', 'yolo26n.pt')
+MODEL_PATH = os.getenv('PIPELINE_MODEL', 'weights/yolo26n.pt')
 CONFIDENCE = float(os.getenv('PIPELINE_CONFIDENCE', '0.45'))
 
 # ---------------------------------------------------------------------------
