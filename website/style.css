@@ -499,22 +499,6 @@ section[id], footer[id], h2[id] {
   letter-spacing: -0.01em;
   flex-shrink: 0;
 }
-.nav-app-demo {
-  font-size: 0.75rem;
-  font-weight: 600;
-  color: var(--ink);
-  text-decoration: none;
-  padding: 0.42rem 0.65rem;
-  border-radius: 6px;
-  border: 1px solid var(--line);
-  background: rgba(255,255,255,0.75);
-  white-space: nowrap;
-  transition: border-color 0.15s, background 0.15s;
-}
-.nav-app-demo:hover {
-  border-color: rgba(0,0,0,0.2);
-  background: rgba(0,0,0,0.03);
-}
 .nav-links {
   display: flex;
   align-items: center;
@@ -1384,24 +1368,6 @@ body {
 .btn-primary:hover {
   background: #262626;
   transform: translateY(-1px);
-}
-.btn-ghost {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  padding: 14px 22px;
-  border-radius: 999px;
-  font-size: 14px;
-  font-weight: 600;
-  text-decoration: none;
-  color: var(--ink);
-  border: 1px solid var(--line);
-  background: #fff;
-  transition: border-color 0.2s, background 0.2s;
-}
-.btn-ghost:hover {
-  border-color: rgba(0,0,0,0.25);
-  background: var(--bg-soft);
 }
 
 .section-tight { padding-top: 3.5rem; }
