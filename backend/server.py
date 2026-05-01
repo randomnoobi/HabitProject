@@ -15,6 +15,10 @@ from collections import OrderedDict
 # Project layout: backend/server.py → repo root is parent of backend/
 _BACKEND_DIR = os.path.dirname(os.path.abspath(__file__))
 PROJECT_ROOT = os.path.dirname(_BACKEND_DIR)
+# root server.py uses runpy.run_path — that does not put backend/ on sys.path, so plain
+# `import relationships` fails unless we add this directory explicitly.
+if _BACKEND_DIR not in sys.path:
+    sys.path.insert(0, _BACKEND_DIR)
 APP_STATIC = os.path.join(PROJECT_ROOT, "app")
 RULES_PATH = os.path.join(PROJECT_ROOT, "config", "safety_rules.json")
 
