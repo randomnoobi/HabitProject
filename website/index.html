@@ -23,6 +23,7 @@
       <li><a href="#product" data-contents>Main function</a></li>
       <li><a href="#desk-hero" data-contents>Your desk</a></li>
       <li><a href="#scenarios" data-contents>Scenarios</a></li>
+      <li><a href="#how-it-works" data-contents>How it works</a></li>
       <li><a href="#alerts" data-contents>App alerts</a></li>
       <li><a href="#why" data-contents>Why Desk Talk</a></li>
       <li><a href="#contact" data-contents>Contact</a></li>
@@ -38,6 +39,7 @@
     <div class="nav-links">
       <a href="#product">Main function</a>
       <a href="#scenarios">Scenarios</a>
+      <a href="#how-it-works">How it works</a>
       <a href="#alerts">Alerts</a>
       <a href="#why">Why Desk Talk</a>
       <a href="#contact" class="nav-contact">Contact</a>
@@ -54,7 +56,7 @@
       <h1 class="hero-title hero-title--product">Your desk,<br><span class="hero-accent">understood.</span></h1>
       <p class="hero-lead">One camera. One calm interface. Desk Talk watches your workspace and turns what it sees into small, timely reminders — so spills, clutter, and lost items never sneak up on you.</p>
       <div class="hero-cta-row">
-        <a href="#product" class="btn-primary">How it works</a>
+        <a href="#how-it-works" class="btn-primary">How it works</a>
         <a href="../" class="btn-ghost">Open the app demo</a>
       </div>
     </div>
@@ -69,17 +71,9 @@
     </div>
   </section>
 
-  <!-- FULL-BLEED DESK VISUAL -->
-  <section id="desk-hero" class="showcase showcase-video showcase--scene" data-speed="0.18">
-    <div class="showcase-bg">
-      <img src="assets/scenes/HabitProject_sceneExample1.jpg" alt="Illustration: liquids, snacks, and a pet too close to a computer" class="showcase-vid" width="1920" height="1080" decoding="async" fetchpriority="high">
-    </div>
-    <div class="showcase-overlay showcase-overlay--dark"></div>
-    <div class="showcase-caption reveal">
-      <span class="showcase-tag">Scenario 1 · Safety</span>
-      <h2>Keep hazards away<br>from your computer.</h2>
-      <p class="showcase-sub">Liquids, food, pets, or clutter crowding the machine — Desk Talk flags the risk before something goes wrong.</p>
-    </div>
+  <!-- FULL-BLEED (visual placeholder — artwork TBD) -->
+  <section id="desk-hero" class="showcase showcase--blank" data-speed="0" aria-label="Hero visual placeholder">
+    <div class="showcase-bg showcase-bg--blank"></div>
   </section>
 
   <!-- THREE SCENARIOS -->
@@ -126,8 +120,43 @@
     </div>
   </section>
 
+  <!-- HOW IT WORKS — flow diagrams -->
+  <section id="how-it-works" class="ref-section section-alt flows-section">
+    <div class="ref-measure ref-measure--wide reveal">
+      <p class="section-kicker">Under the hood</p>
+      <h2 class="ref-h2 ref-h2--product">How it works</h2>
+      <p class="ref-prose">Three pipelines run behind the chat: one watches for physical risk on the desk, one keeps a light memory of where your things were, and one turns habits and quiet hours into messages you can actually use.</p>
+    </div>
+
+    <div class="flow-cards">
+      <article class="flow-card reveal">
+        <p class="flow-card__label">Risk &amp; proximity</p>
+        <p class="flow-card__text">Your webcam feed goes through object detection; the system checks distances and how things move over time. When something looks unsafe, it drafts a line in chat so you can fix it before it becomes a spill or a knock-over.</p>
+        <figure class="flow-card__figure">
+          <img src="assets/flows/HabitProject_function1Flow.png" alt="Flowchart: desk footage to YOLO, distance and temporal checks, Ollama on danger, server to chat" loading="lazy" decoding="async" width="1200" height="800">
+        </figure>
+      </article>
+
+      <article class="flow-card reveal">
+        <p class="flow-card__label">Lost items &amp; “where did it go?”</p>
+        <p class="flow-card__text">On a loose schedule the scene is compared to what it looked like before. Recognized objects update a simple “last seen” log; trickier cases get a second pass from the language model. Ask in plain English and you get a straight answer with a time.</p>
+        <figure class="flow-card__figure">
+          <img src="assets/flows/HabitProject_function2Flow.png" alt="Flowchart: periodic scene check, YOLO and Ollama updates, natural language query for last seen" loading="lazy" decoding="async" width="1200" height="800">
+        </figure>
+      </article>
+
+      <article class="flow-card reveal">
+        <p class="flow-card__label">Habits &amp; gentle nudges</p>
+        <p class="flow-card__text">Camera context and the clock feed a small desk-and-habit state. Before anything pings you, the app respects cooldowns and do-not-disturb; when it is clear to speak, the model writes a short reminder that lands in the right thread.</p>
+        <figure class="flow-card__figure">
+          <img src="assets/flows/HabitProject_function3Flow.png" alt="Flowchart: image and timed input to desk state, cooldown check, Ollama message, individual reminder" loading="lazy" decoding="async" width="1200" height="800">
+        </figure>
+      </article>
+    </div>
+  </section>
+
   <!-- APP ALERTS (MOCK UI) -->
-  <section id="alerts" class="ref-section section-alt">
+  <section id="alerts" class="ref-section">
     <div class="ref-measure ref-measure--wide reveal">
       <p class="section-kicker">Interaction</p>
       <h2 class="ref-h2 ref-h2--product">What shows up in the app</h2>

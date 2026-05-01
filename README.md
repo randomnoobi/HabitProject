@@ -286,7 +286,8 @@ Habit Project/
 │   ├── cameraOpen.py         # Camera preview + snapshot
 │   └── cameraRecognition.py  # YOLO webcam preview
 ├── website/                  # Marketing site (GitHub Pages)
-│   └── assets/scenes/        # Scene illustrations only
+│   ├── assets/scenes/        # Scene illustrations
+│   └── assets/flows/         # “How it works” flow diagrams
 ├── weights/                    # YOLO weights (local; *.pt gitignored)
 └── docs/                     # Design notes
 ```
