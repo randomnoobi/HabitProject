@@ -257,19 +257,6 @@ updateShowcaseParallax();
 })();
 
 
-// ═══ SHOWCASE VIDEO — Sound toggle ═══
-(function initShowcaseVideo() {
-  const btn = document.querySelector('.showcase-sound-toggle');
-  const vid = document.querySelector('.showcase-vid');
-  if (!btn || !vid) return;
-
-  btn.addEventListener('click', () => {
-    vid.muted = !vid.muted;
-    btn.classList.toggle('unmuted', !vid.muted);
-  });
-})();
-
-
 // ═══ INLINE VIDEO PLAYER — Play/pause, progress ═══
 (function initInlineVideo() {
   const wrapper = document.querySelector('.fullwidth-video .video-wrapper');

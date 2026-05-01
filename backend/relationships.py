@@ -47,7 +47,8 @@ EDGE_OBJECTS    = {        # which classes are checked for edge risk
 
 # --- 2. Danger zones ---
 # Each entry: expand the object bbox by `expand` px on every side.
-# Any other object whose bbox enters that zone triggers an intrusion.
+# Overlap alone does NOT alert — only if (target_class, intruder_class) is in the
+# semantic "danger" rules below (e.g. liquid + laptop, not book + laptop).
 DANGER_ZONES = {
     'laptop':   {'expand': 80,  'label': 'Spill / pressure zone'},
     'keyboard': {'expand': 60,  'label': 'Crumb / debris zone'},
@@ -55,10 +56,72 @@ DANGER_ZONES = {
     'cell phone': {'expand': 35, 'label': 'Screen scratch zone'},
 }
 
+# COCO (YOLO) class names that count as *dangerous* intruders for a given target zone.
+# Rationale: physics/real risk — liquids near electronics, food near keys/screen,
+# water/oil near paper, sharp + phone — not e.g. a book resting near a phone.
+_LIQUID = frozenset({'bottle', 'cup', 'wine glass'})
+_FOOD = frozenset({
+    'banana', 'apple', 'sandwich', 'orange', 'broccoli', 'carrot',
+    'hot dog', 'pizza', 'donut', 'cake', 'bowl',
+})
+_SHARP = frozenset({'scissors', 'knife'})  # COCO: fork is thin, skip unless needed
+
+ZONE_DANGER_INTRUDERS = {
+    'laptop': _LIQUID | _FOOD,
+    'keyboard': _LIQUID | _FOOD,
+    'book': _LIQUID | _FOOD,
+    'cell phone': _LIQUID | _SHARP,
+}
+
+
+def is_meaningful_zone_intrusion(target_yolo_class, intruder_yolo_class):
+    """True only for semantic risks (e.g. liquid/food on laptop) — not any bbox overlap."""
+    if target_yolo_class not in DANGER_ZONES or not intruder_yolo_class:
+        return False
+    allowed = ZONE_DANGER_INTRUDERS.get(target_yolo_class)
+    if not allowed:
+        return False
+    ic = str(intruder_yolo_class).strip().lower()
+    al = {x.lower() for x in allowed}
+    return ic in al
+
+
+# Pairs that commonly sit together on a desk (paper + laptop, etc.) — not a hazard.
+def is_benign_proximity_pair(class_a, class_b):
+    a = (class_a or '').strip().lower()
+    b = (class_b or '').strip().lower()
+    if not a or not b:
+        return False
+    benign = {
+        frozenset(('book', 'laptop')),
+        frozenset(('book', 'keyboard')),
+        frozenset(('book', 'cell phone')),
+        frozenset(('book', 'mouse')),
+        frozenset(('laptop', 'keyboard')),
+        frozenset(('laptop', 'mouse')),
+        frozenset(('laptop', 'cell phone')),
+        frozenset(('keyboard', 'mouse')),
+        frozenset(('keyboard', 'cell phone')),
+        frozenset(('tv', 'remote')),
+    }
+    return frozenset((a, b)) in benign
+
+
 # --- 3. Chain reaction ---
 CHAIN_PATH_RATIO     = 0.30   # object within 30 % of segment length → "between"
 CROWD_RADIUS_PX      = 140    # objects within this radius are "crowded"
 CROWD_MIN_OBJECTS    = 3      # minimum cluster size
+
+# Crowding of only "normal" desk items is clutter, not an instability risk.
+BENIGN_CROWD_CLASSES = frozenset({
+    'book', 'laptop', 'keyboard', 'mouse', 'cell phone', 'remote', 'tv',
+})
+
+
+def is_benign_crowd_yolo_names(class_names):
+    if len(class_names) < CROWD_MIN_OBJECTS:
+        return False
+    return all((c or '').strip().lower() in BENIGN_CROWD_CLASSES for c in class_names)
 
 # --- 4. Temporal tracking ---
 HISTORY_LENGTH       = 30     # frames to remember
@@ -102,8 +165,9 @@ def load_config(path=None):
     """Load relationship config from a JSON file.  Returns the raw dict
     and also patches the module-level constants in-place."""
     if path is None:
-        path = os.path.join(os.path.dirname(os.path.abspath(__file__)),
-                            'safety_rules.json')
+        path = os.path.join(
+            os.path.dirname(os.path.abspath(__file__)), '..', 'config', 'safety_rules.json'
+        )
     if not os.path.isfile(path):
         return {}
 
@@ -113,6 +177,7 @@ def load_config(path=None):
     global EDGE_DANGER_PX, EDGE_WARN_PX, EDGE_OBJECTS, DANGER_ZONES
     global CROWD_RADIUS_PX, CROWD_MIN_OBJECTS
     global APPROACH_MIN_FRAMES, APPROACH_RATE, REPEATED_INTRUSION_N
+    global ZONE_DANGER_INTRUDERS
 
     ep = data.get('edge_proximity', {})
     if ep:
@@ -123,6 +188,14 @@ def load_config(path=None):
     dz = data.get('danger_zones', {})
     if dz:
         DANGER_ZONES.update(dz)
+
+    # Optional: per-target YOLO class list for who may trigger a zone *alert*
+    # e.g. { "laptop": ["bottle", "cup", "wine glass", "pizza", ...] }
+    zd = data.get('zone_danger_intruders', {})
+    if zd and isinstance(zd, dict):
+        for t, names in zd.items():
+            if isinstance(names, (list, tuple, set)):
+                ZONE_DANGER_INTRUDERS[t] = {str(n).lower() for n in names}
 
     cr = data.get('chain_reaction', {})
     if cr:
@@ -360,6 +433,14 @@ class RelationshipAnalyzer:
                 continue
             min_d, side = nearest_edge(det['bbox'], fw, fh)
 
+            # Laptop/keyboard often fill the top of the frame — "0px to top" is camera framing, not a fall risk.
+            if (
+                det['class_name'] in ('laptop', 'keyboard', 'tv')
+                and (side or '').lower() == 'top'
+                and min_d < 20
+            ):
+                continue
+
             if min_d < EDGE_DANGER_PX:
                 severity = 'danger'
                 result['risk_events'].append({
@@ -400,35 +481,42 @@ class RelationshipAnalyzer:
                     continue
                 depth = intrusion_depth(det_i['bbox'], zone)
                 pair = (cid_i, cid_t)
+                intruder_cls = det_i['class_name']
+                meaningful = (
+                    depth > 0
+                    and is_meaningful_zone_intrusion(cls, intruder_cls)
+                )
 
                 was_in = self.intrusion_state.get(pair, False)
-                is_in  = depth > 0
+                is_in = meaningful
                 if is_in and not was_in:
                     self.intrusion_enter_log[pair].append(now)
                 self.intrusion_state[pair] = is_in
 
-                if depth > 0:
-                    d_center = dist(det_i['center'], det_t['center'])
-                    result['risk_events'].append({
-                        'type': 'zone_intrusion',
-                        'intruder': cid_i,
-                        'intruder_class': det_i['class_name'],
-                        'target': cid_t,
-                        'target_class': cls,
-                        'zone_label': zcfg['label'],
-                        'depth_px': round(depth, 1),
-                        'center_dist_px': round(d_center, 1),
-                        'zone_expand': zcfg['expand'],
-                    })
-                    result['explanations'].append(
-                        f"{det_i['class_name']} entered {cls}'s "
-                        f"{zcfg['label']} ({int(depth)}px deep)")
-                    result['relationships'].append({
-                        'type': 'danger_zone', 'severity': 'danger',
-                        'intruder': cid_i, 'target': cid_t,
-                        'depth_px': round(depth, 1),
-                        'zone_label': zcfg['label'],
-                    })
+                if not meaningful:
+                    continue
+
+                d_center = dist(det_i['center'], det_t['center'])
+                result['risk_events'].append({
+                    'type': 'zone_intrusion',
+                    'intruder': cid_i,
+                    'intruder_class': intruder_cls,
+                    'target': cid_t,
+                    'target_class': cls,
+                    'zone_label': zcfg['label'],
+                    'depth_px': round(depth, 1),
+                    'center_dist_px': round(d_center, 1),
+                    'zone_expand': zcfg['expand'],
+                })
+                result['explanations'].append(
+                    f"{intruder_cls} (hazard) in {cls}'s "
+                    f"{zcfg['label']} — {int(depth)}px")
+                result['relationships'].append({
+                    'type': 'danger_zone', 'severity': 'danger',
+                    'intruder': cid_i, 'target': cid_t,
+                    'depth_px': round(depth, 1),
+                    'zone_label': zcfg['label'],
+                })
 
     # ── 3. Chain Reaction ───────────────────────────────────────
 
@@ -492,6 +580,8 @@ class RelationshipAnalyzer:
                     continue
                 seen_clusters.add(cluster)
                 names = [dets[c]['class_name'] for c in cluster]
+                if is_benign_crowd_yolo_names(names):
+                    continue
                 result['risk_events'].append({
                     'type': 'crowd', 'cluster': list(cluster),
                     'count': len(cluster),
@@ -521,6 +611,9 @@ class RelationshipAnalyzer:
                         continue
                     rate = (d_old - d_new) / d_old
                     if rate > APPROACH_RATE:
+                        if is_benign_proximity_pair(
+                                dets[a]['class_name'], dets[b]['class_name']):
+                            continue
                         result['risk_events'].append({
                             'type': 'approaching',
                             'object_a': a, 'object_b': b,

@@ -10,7 +10,7 @@ Implements the full chart flow:
           ├─ DANGEROUS → every 1 min → Ollama → Server
           └─ SAFE → Server informed
 
-User customization is loaded from safety_rules.json (per-pair thresholds).
+User customization is loaded from `config/safety_rules.json` (per-pair thresholds).
 
 Usage:
     python main.py                          # webcam + default rules
@@ -182,7 +182,7 @@ def run_pipeline(rules_path=None, source=None, show_preview=None):
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description='Safety Monitoring Pipeline')
     parser.add_argument('--rules', type=str, default=None,
-                        help='Path to safety_rules.json (default: ./safety_rules.json)')
+                        help='Path to safety_rules.json (default: config/safety_rules.json)')
     parser.add_argument('--source', type=str, default=None,
                         help='Video file, image, or camera index (default: webcam)')
     parser.add_argument('--no-preview', action='store_true',

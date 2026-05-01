@@ -1,10 +1,11 @@
 # yolo_webcam_detect.py
+import os
 import cv2
 from ultralytics import YOLO
 
 def main():
     cam_index = 0
-    model = YOLO("yolov8n.pt")  # 轻量：快；可换 yolov8s.pt / yolov8m.pt 更准但更慢
+    model = YOLO(os.getenv('YOLO_MODEL', 'yolo26n.pt'))
 
     cap = cv2.VideoCapture(cam_index)
     if not cap.isOpened():

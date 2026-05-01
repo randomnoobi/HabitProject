@@ -6,7 +6,7 @@ This guide explains how to customize which objects the safety monitoring system 
 
 ## Quick Start
 
-Edit **`safety_rules.json`** in the project root. That's it. The system reads this file at startup.
+Edit **`config/safety_rules.json`**. The system reads this file at startup (Flask server and standalone `main.py` pipeline).
 
 ---
 
@@ -212,7 +212,7 @@ If a rule references `cell phone ↔ laptop` but only the laptop is visible:
 You can have multiple rule files for different setups:
 
 ```bash
-# Default (uses safety_rules.json in project root)
+# Default (uses config/safety_rules.json)
 python main.py
 
 # Custom rules file

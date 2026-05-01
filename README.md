@@ -267,17 +267,26 @@ The LLM generates 1-2 sentences that are 100% in-character. Templates serve as a
 
 ```
 Habit Project/
-├── README.md                # This file
-├── server.py                # Backend: 8-character detection + LLM + web server
-├── index.html               # Web UI — served by server.py or open directly
-├── style.css                # UI styles, 8 character bubble themes
-├── app.js                   # Frontend: dual-mode (live server / demo simulation)
-├── requirements.txt         # Python dependencies
-├── .env.example             # Configuration template (copy to .env)
-├── .env                     # Your local config (API keys, camera indices)
-├── cameraOpen.py            # Camera preview and snapshot utility
-├── cameraRecognition.py     # YOLOv8 real-time webcam detection
-└── yolov8n.pt               # YOLOv8 nano model weights
+├── README.md
+├── server.py                 # Entry: runs backend/server.py from repo root
+├── main.py                   # Standalone safety pipeline (CLI)
+├── requirements.txt
+├── .env.example
+├── app/                      # Web UI (Flask static + open locally)
+│   ├── index.html
+│   ├── style.css
+│   └── app.js
+├── backend/
+│   ├── server.py             # Flask API, cameras, LLM, detection
+│   └── relationships.py      # Spatial relationship engine
+├── config/
+│   └── safety_rules.json     # Per-pair thresholds + zone config
+├── pipeline/                 # Chart-flow pipeline modules (main.py)
+├── scripts/
+│   ├── cameraOpen.py         # Camera preview + snapshot
+│   └── cameraRecognition.py  # YOLO webcam preview
+├── website/                  # Marketing / case study (GitHub Pages)
+└── docs/                     # Design notes
 ```
 
 ---
@@ -320,16 +329,16 @@ The server:
 
 ### Quick Start — Demo Mode (No Server)
 
-Just open `index.html` directly in your browser. The app runs a built-in simulation with all 8 characters. No camera or server needed.
+Just open `app/index.html` directly in your browser. The app runs a built-in simulation with all 8 characters. No camera or server needed.
 
 ### Standalone Camera Tools
 
 ```bash
 # Camera preview (press s to snapshot, q to quit)
-python cameraOpen.py
+python scripts/cameraOpen.py
 
 # YOLO detection preview (press q to quit)
-python cameraRecognition.py
+python scripts/cameraRecognition.py
 ```
 
 ---
@@ -367,16 +376,16 @@ DISAPPEAR_FRAMES=40
 
 ---
 
-## GitHub Pages (portfolio site)
+## GitHub Pages (portfolio site + app demo)
 
-The static case-study site lives in **`website/`**. Pushing to **`main`** runs [`.github/workflows/deploy-pages.yml`](.github/workflows/deploy-pages.yml), which publishes that folder to **GitHub Pages** using the repo’s default `GITHUB_TOKEN` (you do **not** need to paste passwords or PATs into the workflow).
+Pushing to **`main`** runs [`.github/workflows/deploy-pages.yml`](.github/workflows/deploy-pages.yml), which publishes the **`app/`** UI at the site root and **`website/`** under **`/website/`**, with links to switch between them.
 
 1. Create a new repository on GitHub and push this project (`main`).
 2. On GitHub: **Settings → Pages → Build and deployment → Source: GitHub Actions**.
 3. Open the **Actions** tab and confirm the **Deploy site to GitHub Pages** workflow succeeds.
 4. Your site URL will be `https://<username>.github.io/<repo>/` (unless you use a custom domain).
 
-**Note:** `*.mp4` and `*.pt` are listed in `.gitignore` so pushes stay under GitHub’s size limits. The hero video on the deployed site will be empty until you add a small `website/demo.mp4` via [Git LFS](https://git-lfs.com), a release asset, or host the file elsewhere and point the `<video>` `src` to that URL.
+Model weights (`*.pt`) stay gitignored; place them in the project root or set `YOLO_MODEL` / `PIPELINE_MODEL` accordingly.
 
 ---
 

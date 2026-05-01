@@ -37,7 +37,7 @@ VIDEO_SOURCE = os.getenv('PIPELINE_VIDEO', '')
 # ---------------------------------------------------------------------------
 #  Object Detection
 # ---------------------------------------------------------------------------
-MODEL_PATH = os.getenv('PIPELINE_MODEL', 'yolov8n.pt')
+MODEL_PATH = os.getenv('PIPELINE_MODEL', 'yolo26n.pt')
 CONFIDENCE = float(os.getenv('PIPELINE_CONFIDENCE', '0.45'))
 
 # ---------------------------------------------------------------------------
@@ -83,7 +83,7 @@ def load_rules(path=None):
         rules_path = path
     else:
         rules_path = os.path.join(
-            os.path.dirname(os.path.abspath(__file__)), '..', 'safety_rules.json'
+            os.path.dirname(os.path.abspath(__file__)), '..', 'config', 'safety_rules.json'
         )
 
     if os.path.isfile(rules_path):

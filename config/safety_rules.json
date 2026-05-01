@@ -1,8 +1,10 @@
 {
     "_comment": "Desk Talk — Relationship Detection Config",
     "_instructions": [
-        "danger_zones: expanded bounding-box zones around protected objects.",
-        "  expand = pixels to grow bbox on each side.  Any other object entering = danger.",
+        "danger_zones: expanded bounding-box zones around protected objects (expand = px on each side).",
+        "  Alerts only for 'meaningful' intruders: see zone_danger_intruders in relationships.py defaults",
+        "  (liquids/food on laptop & keyboard, liquids/food on book, liquid/sharp on phone).",
+        "  Optional: override with \"zone_danger_intruders\": { \"laptop\": [\"cup\", \"bottle\", ...] }.",
         "edge_proximity: objects near the frame/desk edge.",
         "  danger_px = red zone, warn_px = yellow zone.",
         "  objects = which YOLO classes are checked.",
