@@ -11,6 +11,8 @@
 </head>
 <body>
 
+  <a href="website/" class="github-pages-switcher" aria-label="Open landing page">Landing page</a>
+
   <!-- Notification Toast -->
   <div id="notification-toast" class="toast hidden">
     <div class="toast-icon"></div>
@@ -49,9 +51,6 @@
             <span class="splash-pill" data-chat="glug" style="--delay:1">☕ Glug</span>
             <span class="splash-pill" data-chat="munch" style="--delay:3">🍕 Munch</span>
             <span class="splash-pill" data-chat="sheets" style="--delay:4">📄 Sheets</span>
-            <span class="splash-pill" data-chat="zip" style="--delay:5">🔌 Zip</span>
-            <span class="splash-pill" data-chat="surge" style="--delay:6">🔋 Surge</span>
-            <span class="splash-pill" data-chat="buzz" style="--delay:7">📱 Buzz</span>
           </div>
           <h1 class="splash-title">What's your desk <em>really</em> thinking?</h1>
           <p class="splash-subtitle">swipe to find out</p>
@@ -76,6 +75,13 @@
             <span class="connection-badge" id="connection-badge">Demo</span>
           </div>
           <div class="header-btns-group">
+            <label class="mode-toggle" id="mode-toggle" aria-label="Toggle live mode">
+              <input type="checkbox" id="mode-toggle-input">
+              <span class="mode-toggle-track">
+                <span class="mode-toggle-thumb"></span>
+              </span>
+              <span class="mode-toggle-label" id="mode-toggle-label">Live</span>
+            </label>
             <button class="header-btn settings-btn" id="btn-settings" aria-label="Safety rules settings">
               <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                 <circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/>
@@ -102,9 +108,16 @@
           </button>
           <div class="chat-header-info">
             <span class="chat-header-icon" id="chat-header-icon"></span>
-            <span class="chat-header-name" id="chat-header-name"></span>
+            <div class="chat-header-titles">
+              <span class="chat-header-name" id="chat-header-name"></span>
+              <span class="chat-header-subline" id="chat-header-subline"></span>
+            </div>
           </div>
           <button type="button" class="header-btn live-swipe-hint" id="btn-go-live" aria-label="Open live desk">Live</button>
+        </div>
+        <div class="chat-real-life-banner hidden" id="chat-real-life" role="note"></div>
+        <div id="chat-todo-panel" class="chat-widget-panel hidden" aria-hidden="true">
+          <!-- Dynamically rendered per-character widget (todo, break timer, sip counter, snack log) -->
         </div>
         <div class="screen-content chat-messages" id="chat-messages">
           <!-- Rendered by JS -->
@@ -121,6 +134,11 @@
           <div class="drawer-tab-body" id="drawer-tab-camera">
             <div id="drawer-camera-feeds"></div>
             <div class="drawer-detection-summary" id="drawer-detection-strip"></div>
+            <div class="drawer-recent-head">
+              <span class="drawer-recent-title">Recent proof photos</span>
+              <span class="drawer-recent-hint">Crops from alerts—scroll for lost-item checks</span>
+            </div>
+            <div class="drawer-snapshots" id="drawer-snapshots" aria-label="Recent desk snapshots"></div>
           </div>
         </div>
 
@@ -163,16 +181,36 @@
       <!-- ========== LIVE DESK (TikTok-style + 弹幕) ========== -->
       <div id="screen-camera" class="screen">
         <div class="live-stage">
-          <div id="live-video-primary" class="live-video-primary">
-            <!-- Primary full-bleed feed (live or demo) -->
+          <div class="live-view-stack">
+            <div id="live-video-primary" class="live-video-primary">
+              <!-- Primary full-bleed feed (live or demo) -->
+            </div>
+            <div id="danmu-layer" class="danmu-layer" aria-live="polite"></div>
+            <div class="live-chrome">
+              <button type="button" class="live-back-btn" id="btn-cam-back" aria-label="Back">
+                <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+                <span>Chat</span>
+              </button>
+              <div class="live-chrome-center" role="tablist" aria-label="Stream view">
+                <div class="live-view-tabs">
+                  <button type="button" class="live-view-tab is-active" id="tab-live-analysis" data-view="analysis" role="tab" aria-selected="true">Analysis</button>
+                  <button type="button" class="live-view-tab" id="tab-live-clean" data-view="clean" role="tab" aria-selected="false">Camera</button>
+                </div>
+              </div>
+              <div class="live-pill" id="live-detection-pill">Desk</div>
+            </div>
           </div>
-          <div id="danmu-layer" class="danmu-layer" aria-live="polite"></div>
-          <div class="live-chrome">
-            <button type="button" class="live-back-btn" id="btn-cam-back" aria-label="Back">
-              <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
-              <span>Chat</span>
-            </button>
-            <div class="live-pill" id="live-detection-pill">Desk</div>
+          <div class="live-detections-bar" id="live-detections-bar" aria-label="Detections and relationship risks">
+            <div class="live-checklist-section">
+              <div class="live-detections-label" id="live-detections-label">Detected in frame</div>
+              <ul class="live-detections-checklist" id="live-detections-list" role="list">
+                <li class="live-check-row live-check-row--empty"><span class="live-check-ico">—</span><span class="live-check-body">…</span></li>
+              </ul>
+            </div>
+            <div class="live-checklist-section">
+              <div class="live-detections-label" id="live-risks-label">Risks and relationships</div>
+              <ul class="live-risks-list" id="live-risks-list" role="list"></ul>
+            </div>
           </div>
           <!-- Demo-only: hidden full sim markup cloned if needed -->
           <div id="sim-camera-feeds" class="live-sim-hidden" aria-hidden="true">
@@ -181,7 +219,6 @@
                 <div class="detected-object obj-monty" data-name="Monty 🖥️"><div class="detect-box"></div></div>
                 <div class="detected-object obj-glug" data-name="Glug 🥤"><div class="detect-box"></div></div>
                 <div class="detected-object obj-sheets" data-name="Sheets 📄"><div class="detect-box"></div></div>
-                <div class="detected-object obj-zip" data-name="Zip 🔌"><div class="detect-box"></div></div>
               </div>
             </div>
           </div>

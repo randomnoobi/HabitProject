@@ -1,4 +1,4 @@
-# Publishes /website to GitHub Pages (static HTML/CSS/JS + assets).
+# Publishes the interactive app at / and the marketing site at /website/.
 # Repo → Settings → Pages → Build and deployment → Source: GitHub Actions
 name: Deploy site to GitHub Pages
 
@@ -25,8 +25,15 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - uses: actions/configure-pages@v4
+      - name: Build Pages bundle (app + landing site)
+        run: |
+          set -e
+          mkdir -p _pages/website
+          cp index.html style.css app.js _pages/
+          cp -r website/. _pages/website/
+          touch _pages/.nojekyll
       - uses: actions/upload-pages-artifact@v3
         with:
-          path: website
+          path: _pages
       - id: deployment
         uses: actions/deploy-pages@v4
